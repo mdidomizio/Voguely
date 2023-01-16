@@ -1,6 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/nav_graph">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/splashFragment">
 
+    <fragment
+        android:id="@+id/splashFragment"
+        android:name="com.wit.voguely.SplashFragment"
+        android:label="fragment_splash"
+        tools:layout="@layout/fragment_splash" >
+        <action
+            android:id="@+id/action_splashFragment_to_loginSignupFragment"
+            app:destination="@id/loginSignupFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/loginSignupFragment"
+        android:name="com.wit.voguely.LoginSignupFragment"
+        android:label="fragment_login_signup"
+        tools:layout="@layout/fragment_login_signup" />
 </navigation>
