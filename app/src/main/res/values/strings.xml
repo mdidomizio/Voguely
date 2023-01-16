@@ -1,13 +1,15 @@
 <resources>
     <string name="app_name">Voguely</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
     <string name="HeyText">Hey!</string>
-    <string name="SubtitleText">Welcome Back</string>
+    <string name="SubtitleTextLogin">Welcome Back</string>
+    <string name="SubtitleTextSignUp">Join Now</string>
     <string name="LoginTab">Login</string>
     <string name="SignUpTab">Sign Up</string>
     <string name="emailField">Email</string>
     <string name="passwordField">Password</string>
     <string name="loginButton">Login</string>
+    <string name="signUpButton">Sign Up</string>
     <string name="termsConditionText">Terms and Conditions Apply*</string>
+    <string name="login_tab">Login</string>
 </resources>
