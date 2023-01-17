@@ -18,5 +18,14 @@
         android:id="@+id/loginSignupFragment"
         android:name="com.wit.voguely.ui.login.LoginSignupFragment"
         android:label="fragment_login_signup"
-        tools:layout="@layout/fragment_login_signup" />
+        tools:layout="@layout/fragment_login_signup" >
+        <action
+            android:id="@+id/action_loginSignupFragment_to_mainFragment2"
+            app:destination="@id/mainFragment2" />
+    </fragment>
+    <fragment
+        android:id="@+id/mainFragment2"
+        android:name="com.wit.voguely.ui.main.MainFragment"
+        android:label="fragment_main"
+        tools:layout="@layout/fragment_main" />
 </navigation>

@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayout.OnTabSelectedListener
 import com.wit.voguely.R
@@ -67,6 +68,9 @@ class LoginSignupFragment : Fragment() {
             }
 
             })
+        binding.actionButton.setOnClickListener{
+            findNavController().navigate(R.id.action_loginSignupFragment_to_mainFragment2)
+        }
 
 
         }
