@@ -43,6 +43,7 @@
         app:tabTextColor="#E8772E"
         app:tabIndicatorColor="#E8772E"
         app:tabMode="fixed"
+        app:tabTextAppearance="@android:style/TextAppearance.Widget.TabWidget"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/welcome_back_text"

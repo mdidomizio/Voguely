@@ -6,14 +6,21 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayout.OnTabSelectedListener
 import com.wit.voguely.databinding.FragmentLoginSignupBinding
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 
 class LoginSignupFragment : Fragment() {
 
     private lateinit var binding: FragmentLoginSignupBinding
+    private lateinit var viewModel : MainViewModel
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -32,6 +39,13 @@ class LoginSignupFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        lifecycleScope.launch{
+            viewModel.signupTab.collectLatest {
+
+            }
+        }
+
 
         binding.tabs.addOnTabSelectedListener(
             object : OnTabSelectedListener {
@@ -60,6 +74,7 @@ class LoginSignupFragment : Fragment() {
 
             }
         )
+
 
 
         }
