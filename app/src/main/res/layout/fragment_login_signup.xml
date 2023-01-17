@@ -5,8 +5,8 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".LoginSignupFragment"
-    android:layout_marginRight="20dp"
-    android:layout_marginLeft="20dp"
+    android:layout_marginRight="25dp"
+    android:layout_marginLeft="25dp"
     android:id="@+id/form_login_signup">
 
     <TextView
@@ -16,7 +16,7 @@
         android:text="@string/HeyText"
         android:textSize="40dp"
         android:textColor="#E8772E"
-        android:layout_marginTop="70dp"
+        android:layout_marginTop="80dp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -29,13 +29,14 @@
         android:text="@string/SubtitleTextLogin"
         android:textSize="30dp"
         android:textColor="#E8772E"
-        android:textStyle="bold"
+
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/hey_text"/>
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tabs"
+        android:layout_marginTop="30dp"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:layout_gravity="bottom"
@@ -84,8 +85,9 @@
         android:layout_height="50dp"
         android:hint="@string/emailField"
         android:inputType="textEmailAddress"
-        android:background="#E1D9D1"
-        android:paddingLeft="10dp"
+        android:background="@drawable/roundstyle"
+        android:backgroundTint="#E1D9D1"
+        android:paddingLeft="20dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tabs"
@@ -98,8 +100,9 @@
         android:layout_height="50dp"
         android:hint="@string/passwordField"
         android:inputType="textPassword"
-        android:background="#E1D9D1"
-        android:paddingLeft="10dp"
+        android:background="@drawable/roundstyle"
+        android:backgroundTint="#E1D9D1"
+        android:paddingLeft="20dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/email_field"
@@ -108,7 +111,8 @@
 
     <Button
         android:id="@+id/actionButton"
-        android:layout_width="150dp"
+        android:background="@drawable/roundstyle"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
