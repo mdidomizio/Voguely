@@ -74,15 +74,17 @@ class LoginSignupFragment : Fragment() {
 
     private fun setSelectedTabText (selectedTab: SelectedTab){
 
-            if (selectedTab == SelectedTab.LOGIN) {
+        binding.welcomeBackText.setText(selectedTab.welcomeMessage)
+        binding.actionButton.setText(selectedTab.buttonText)
+
+    }
+
+}
+
+/* if (selectedTab == SelectedTab.LOGIN) {
                 binding.welcomeBackText.text = getString(R.string.SubtitleTextLogin)
                 binding.actionButton.text = getString(R.string.loginButton)
             } else {
                 binding.welcomeBackText.text = getString(R.string.SubtitleTextSignUp)
                 binding.actionButton.text = getString(R.string.signUpButton)
-            }
-
-
-    }
-
-}
+            } */
