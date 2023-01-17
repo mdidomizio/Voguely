@@ -1,10 +1,8 @@
-package com.wit.voguely
+package com.wit.voguely.ui
 
 import android.os.Bundle
-import android.view.animation.AccelerateInterpolator
-import android.view.animation.DecelerateInterpolator
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat.animate
+import com.wit.voguely.R
 import com.wit.voguely.databinding.ActivityMainBinding
 
 

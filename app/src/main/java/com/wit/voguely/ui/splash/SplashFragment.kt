@@ -1,13 +1,13 @@
-package com.wit.voguely
+package com.wit.voguely.ui.splash
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.animation.AccelerateInterpolator
 import android.view.animation.DecelerateInterpolator
 import androidx.navigation.fragment.findNavController
+import com.wit.voguely.R
 import com.wit.voguely.databinding.FragmentSplashBinding
 
 
