@@ -3,7 +3,7 @@ package com.wit.voguely.ui.main.home
 class Product (var urls: String,
                var itemName: String,
                var price: String,
-               var likes: String,
+               var rate: String,
                var review: String)
 
 val mockProduct = Product (

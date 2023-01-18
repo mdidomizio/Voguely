@@ -14,8 +14,9 @@ class HomeViewModel : ViewModel() {
         "https://resource.logitechg.com/w_692,c_limit,q_auto,f_auto,dpr_1.0/d_transparent.gif/content/dam/gaming/en/products/audio/g735-wireless-headset/gallery/g735-gallery-1.png?v=1",
         "AirPods Max",
         "629,00 €",
-        "3.456",
-        "14.787")
+        "4.6",
+        "86 Reviews")
+
     private val _dataProduct = MutableStateFlow <List<Product>>(listOf())
     val dataProduct :StateFlow<List<Product>> = _dataProduct.asStateFlow()
 
@@ -29,9 +30,9 @@ class HomeViewModel : ViewModel() {
 
     fun loadData(mockProduct : Product){
         _displayProgressBar.value = true
+
         viewModelScope.launch{
             _dataProduct.update{listOf(mockProduct)}
-
             _displayProgressBar.value = false
         }
 
