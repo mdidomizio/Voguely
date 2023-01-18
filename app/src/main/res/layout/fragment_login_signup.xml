@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ui.login.login.LoginSignupFragment"
+    tools:context=".ui.login.LoginSignupFragment"
     android:layout_marginRight="25dp"
     android:layout_marginLeft="25dp"
     android:id="@+id/form_login_signup">
@@ -42,6 +42,7 @@
         android:layout_gravity="bottom"
         app:tabTextColor="#E8772E"
         app:tabIndicatorColor="#E8772E"
+        app:tabIndicatorFullWidth="false"
         app:tabMode="fixed"
         app:tabTextAppearance="@android:style/TextAppearance.Widget.TabWidget"
         app:layout_constraintStart_toStartOf="parent"
