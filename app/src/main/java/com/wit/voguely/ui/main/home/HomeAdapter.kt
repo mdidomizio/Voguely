@@ -25,7 +25,7 @@ class HomeAdapter : RecyclerView.Adapter<HomeAdapter.ViewHolder> () {
 
         holder.binding.itemName.text = data[position].itemName
         holder.binding.itemPrice.text = data[position].price
-        holder.binding.itemRate.text = data[position].likes
+        holder.binding.itemRate.text = data[position].rate
         holder.binding.itemReviews.text = data[position].review
 
         Glide

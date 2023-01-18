@@ -17,6 +17,8 @@ class HomeViewModel : ViewModel() {
         "4.6",
         "86 Reviews")
 
+
+
     private val _dataProduct = MutableStateFlow <List<Product>>(listOf())
     val dataProduct :StateFlow<List<Product>> = _dataProduct.asStateFlow()
 

@@ -14,8 +14,8 @@
     <string name="login_tab">Login</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="item_name">name: some text in almost black</string>
+    <string name="item_name">name item in almost black</string>
     <string name="item_price">some orange price in €</string>
-    <string name="like_counter">likes number and star icon</string>
-    <string name="reviews_counter">reviews number and three dots icon icon</string>
+    <string name="like_counter">rate number and star icon</string>
+    <string name="reviews_counter">reviews number </string>
 </resources>
