@@ -1,29 +1,39 @@
 package com.wit.voguely.ui.main.home
 
+import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.wit.voguely.databinding.FragmentHomeBinding
+import com.bumptech.glide.Glide
+import com.wit.voguely.databinding.RecyclerViewSingleItemLayoutBinding
 
 class HomeAdapter : RecyclerView.Adapter<HomeAdapter.ViewHolder> () {
-    var data : MutableList<DataItemClass> = mutableListOf()
+    var data : List<Product> = listOf()
 
-    inner class ViewHolder(val binding:FragmentHomeBinding) : RecyclerView.ViewHolder(binding.root){
+    inner class ViewHolder(val binding:RecyclerViewSingleItemLayoutBinding) : RecyclerView.ViewHolder(binding.root){
         init {
-            //TODO => binding.singleItem.setOnClickListener{
+            //TODO (maybe) => binding.singleItem.setOnClickListener{
             //                onItemClick?.invoke(data[adapterPosition])
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-
+        val binding = RecyclerViewSingleItemLayoutBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return ViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        TODO("Not yet implemented")
+
+        holder.binding.itemName.text = data[position].itemName
+        holder.binding.itemPrice.text = data[position].price
+        holder.binding.likes.text = data[position].likes.toString()
+        holder.binding.itemReviews.text = data[position].review
+
+        Glide
+            .with(holder.itemView)
+            .load(data[position].urls)
+            .into(holder.binding.itemPic)
     }
 
-    override fun getItemCount(): Int {
-        TODO("Not yet implemented")
-    }
+    override fun getItemCount() = data.size
 }
 
