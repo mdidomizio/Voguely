@@ -15,7 +15,7 @@ class HomeAdapter : RecyclerView.Adapter<HomeAdapter.ViewHolder> () {
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val binding =
+
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {

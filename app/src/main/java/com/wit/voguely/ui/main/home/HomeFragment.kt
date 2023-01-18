@@ -13,6 +13,8 @@ import com.wit.voguely.ui.main.MainFragment
 
 class HomeFragment : Fragment() {
 
+    val adapter : HomeAdapter()
+
     private var activity : MainFragment? = null
     private lateinit var binding : FragmentHomeBinding
 
