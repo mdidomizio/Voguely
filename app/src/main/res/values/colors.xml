@@ -7,6 +7,11 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="orange">#E8772E</color>
+    <color name="vivid_tangelo">#E8772E</color>
+    <color name="caput_mortuum">#552619</color>
+    <color name="timberwolf">#E1D9D1</color>
+    <color name="vivid_red_tangelo">#DC622A</color>
+    <color name="deep_saffron">#FBA139</color>
+
 
 </resources>
