@@ -34,6 +34,8 @@ class HomeAdapter : RecyclerView.Adapter<HomeAdapter.ViewHolder> () {
             .into(holder.binding.itemPic)
     }
 
+
+
     override fun getItemCount() = data.size
 }
 

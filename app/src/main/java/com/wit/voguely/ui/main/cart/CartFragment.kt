@@ -9,12 +9,16 @@ import com.wit.voguely.R
 import com.wit.voguely.databinding.FragmentCartBinding
 import com.wit.voguely.ui.MainActivity
 import com.wit.voguely.ui.main.MainFragment
+import com.wit.voguely.ui.main.home.HomeAdapter
 
 
 class CartFragment : Fragment() {
 
+
+
     private var activity : MainFragment? = null
     private lateinit var binding : FragmentCartBinding
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
