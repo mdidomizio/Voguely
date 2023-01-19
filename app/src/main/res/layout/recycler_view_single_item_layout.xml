@@ -81,21 +81,22 @@
             android:layout_marginBottom="20dp"
             android:layout_marginLeft="15dp"
             android:gravity="center"
-            app:drawableEndCompat="@drawable/ic_baseline_more_vert_24"
             app:layout_constraintStart_toEndOf="@id/item_rate"
             app:layout_constraintBaseline_toBaselineOf="@id/item_rate"
             app:layout_constraintBottom_toBottomOf="parent"
              />
 
-        <!-- TODO: Update blank fragment layout
         <ImageView
             android:id="@+id/see_more_icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:drawableEndCompat="@drawable/ic_baseline_more_vert_24"
+            android:src="@drawable/ic_baseline_more_vert_24"
+            android:gravity="center"
+            android:layout_marginBottom="20dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            />-->
+
+            />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -2,6 +2,7 @@ package com.wit.voguely.ui.main.home
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -24,7 +25,6 @@ class HomeViewModel : ViewModel() {
 
     private val _displayProgressBar = MutableStateFlow(false)
     val displayProgressBar : StateFlow<Boolean> = _displayProgressBar
-
 
     init {
         loadData(mockProduct)
