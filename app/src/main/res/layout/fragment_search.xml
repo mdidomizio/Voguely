@@ -15,7 +15,7 @@
             android:layout_marginTop="28dp"
             android:background="@drawable/roundstyle"
             android:backgroundTint="#FAFAFA"
-            android:hint="Search Product Name"
+            android:hint="@string/searchbarHint"
             android:padding="10dp"
             app:layout_constraintEnd_toStartOf="@id/search_bar_icon"
             app:layout_constraintStart_toStartOf="parent"

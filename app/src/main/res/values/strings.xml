@@ -18,4 +18,5 @@
     <string name="item_price">some orange price in €</string>
     <string name="like_counter">rate number and star icon</string>
     <string name="reviews_counter">reviews number </string>
+    <string name="searchbarHint">Search Product Name</string>
 </resources>
