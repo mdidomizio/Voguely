@@ -18,6 +18,7 @@ class SearchViewModel : ViewModel() {
     var displayNoResultFound: StateFlow<Boolean> = _displayNoResultFound
 
     fun searchItem(charSequence: CharSequence) {
+        val searchTerm = charSequence.toString()
         viewModelScope.launch {
             /* if (s[0].isLowerCase()) {
                  s.toString().uppercase()
@@ -30,7 +31,7 @@ class SearchViewModel : ViewModel() {
 
             _itemSearched.update {
                 mockData.filter { product ->
-                    product.itemName.contains(charSequence)
+                    product.itemName.lowercase().contains(searchTerm.lowercase())
                 }
             }
         }
