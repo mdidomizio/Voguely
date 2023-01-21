@@ -11,33 +11,31 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 class SearchViewModel : ViewModel() {
-
     private val _itemSearched = MutableStateFlow<List<Product>>(listOf())
-    val itemSearched : StateFlow <List<Product>> = _itemSearched.asStateFlow()
+    val itemSearched: StateFlow<List<Product>> = _itemSearched.asStateFlow()
 
     private var _displayNoResultFound = MutableStateFlow(false)
-    var displayNoResultFound : StateFlow<Boolean> = _displayNoResultFound
+    var displayNoResultFound: StateFlow<Boolean> = _displayNoResultFound
 
-
-
-    fun searchItem(s: CharSequence){
+    fun searchItem(charSequence: CharSequence) {
         viewModelScope.launch {
+            /* if (s[0].isLowerCase()) {
+                 s.toString().uppercase()
+                 val result : Unit = _itemSearched.update{ mockData.filter{it.itemName.contains(s)}}
+                 if(result.toString().isEmpty()){
+                     _displayNoResultFound.value = true
+                 }
+             } */
+            //_displayNoResultFound.value = true
 
-           /* if (s[0].isLowerCase()) {
-                s.toString().uppercase()
-                val result : Unit = _itemSearched.update{ mockData.filter{it.itemName.contains(s)}}
-                if(result.toString().isEmpty()){
-                    _displayNoResultFound.value = true
+            _itemSearched.update {
+                mockData.filter { product ->
+                    product.itemName.contains(charSequence)
                 }
-            } */
-             _itemSearched.update{ mockData.filter{it.itemName.contains(s)}}
-           //_displayNoResultFound.value = true
-
+            }
         }
-
-        }
-
     }
+}
 
 
 

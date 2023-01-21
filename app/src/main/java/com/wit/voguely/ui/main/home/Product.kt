@@ -21,7 +21,6 @@ val mockData = listOf(
         "4.6",
         "86 Reviews"),
 
-
     Product(
         "https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/MMMQ3?wid=2000&hei=2000&fmt=jpeg&qlt=95&.v=1645138486301",
         "Magic Mouse",
