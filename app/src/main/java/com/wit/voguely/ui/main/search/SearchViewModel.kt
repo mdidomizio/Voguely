@@ -20,18 +20,23 @@ class SearchViewModel : ViewModel() {
     fun searchItem(charSequence: CharSequence) {
         val searchTerm = charSequence.toString()
         viewModelScope.launch {
-            /* if (s[0].isLowerCase()) {
-                 s.toString().uppercase()
-                 val result : Unit = _itemSearched.update{ mockData.filter{it.itemName.contains(s)}}
-                 if(result.toString().isEmpty()){
-                     _displayNoResultFound.value = true
-                 }
-             } */
-            //_displayNoResultFound.value = true
+            _displayNoResultFound.value = false
 
-            _itemSearched.update {
-                mockData.filter { product ->
-                    product.itemName.lowercase().contains(searchTerm.lowercase())
+            if (searchTerm == "") {
+                _itemSearched.update {
+                    emptyList()
+                }
+            } else {
+                _itemSearched.update {
+                    val foundItems = mockData.filter { product ->
+                        product.itemName.lowercase().contains(searchTerm.lowercase())
+                    }
+
+                    if (foundItems.isEmpty()) {
+                        _displayNoResultFound.value = true
+                    }
+
+                    foundItems
                 }
             }
         }
