@@ -20,22 +20,28 @@ class SearchViewModel : ViewModel() {
     fun searchItem(charSequence: CharSequence) {
         val searchTerm = charSequence.toString()
         viewModelScope.launch {
+            // Setting teh no result display to be hidden by default
             _displayNoResultFound.value = false
 
             if (searchTerm == "") {
+                // When the search is empty, show an empty list
                 _itemSearched.update {
                     emptyList()
                 }
             } else {
+                // When a search exists
                 _itemSearched.update {
+                    // Get the results
                     val foundItems = mockData.filter { product ->
                         product.itemName.lowercase().contains(searchTerm.lowercase())
                     }
 
+                    // When there are no results, show the no results label again
                     if (foundItems.isEmpty()) {
                         _displayNoResultFound.value = true
                     }
 
+                    // Return the results. Works both with results, and when empty
                     foundItems
                 }
             }
