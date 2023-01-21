@@ -34,7 +34,7 @@
             android:id="@+id/item_name"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="name of the item"
+            android:text="AirPods Max"
             android:textSize="15dp"
             android:textColor="#0C1A30"
             android:layout_marginTop="10dp"

@@ -11,6 +11,7 @@ import android.widget.ListAdapter
 import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import com.wit.voguely.R
 import com.wit.voguely.databinding.FragmentCartBinding
 import com.wit.voguely.databinding.FragmentSearchBinding
@@ -45,6 +46,15 @@ class SearchFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        binding.recyclerviewSearch?.adapter = adapter
+        adapter.onItemClick = {
+            val bundle = Bundle()
+            bundle.putString("url", it.urls )
+            bundle.putString("itemName", it.itemName)
+            bundle.putString("itemPrice", it.price)
+            findNavController().navigate(R.id.action_searchFragment_to_cartFragment)
+        }
 
         lifecycleScope.launchWhenResumed {
             viewModel.itemSearched.collectLatest {

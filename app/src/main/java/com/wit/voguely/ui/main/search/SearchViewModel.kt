@@ -22,10 +22,18 @@ class SearchViewModel : ViewModel() {
 
     fun searchItem(s: CharSequence){
         viewModelScope.launch {
-             _itemSearched.update{ mockData.filter{it.itemName.contains(s)}}
-          // val result : List<Product> = _itemSearched.update{ mockData.filter{it.itemName.contains(s)}}
 
-               // _displayNoResultFound = true
+           /* if (s[0].isLowerCase()) {
+                s.toString().uppercase()
+                val result : Unit = _itemSearched.update{ mockData.filter{it.itemName.contains(s)}}
+                if(result.toString().isEmpty()){
+                    _displayNoResultFound.value = true
+                }
+            } */
+             _itemSearched.update{ mockData.filter{it.itemName.contains(s)}}
+           //_displayNoResultFound.value = true
+
+        }
 
         }
 
@@ -34,4 +42,3 @@ class SearchViewModel : ViewModel() {
 
 
 
-}

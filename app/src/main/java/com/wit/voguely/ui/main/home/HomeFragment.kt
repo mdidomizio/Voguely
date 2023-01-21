@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import com.wit.voguely.R
 import com.wit.voguely.databinding.FragmentCartBinding
 import com.wit.voguely.databinding.FragmentHomeBinding
@@ -45,9 +46,16 @@ class HomeFragment : Fragment() {
 
         binding.recyclerview?.adapter = adapter
 
+        adapter.onItemClick = {
+            val bundle = Bundle()
+            bundle.putString("url", it.urls )
+            bundle.putString("itemName", it.itemName)
+            bundle.putString("itemPrice", it.price)
+            findNavController().navigate(R.id.action_homeFragment_to_cartFragment)
+        }
+
         lifecycleScope.launchWhenResumed {
             viewModel.dataProduct.collectLatest {
-
                 adapter.data = it
                 adapter.notifyDataSetChanged()
 
