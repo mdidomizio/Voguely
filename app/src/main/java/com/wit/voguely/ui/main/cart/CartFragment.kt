@@ -73,7 +73,7 @@ class CartFragment : Fragment() {
         lifecycleScope.launchWhenResumed {
             viewModel.totalPrice.collectLatest {
                //TODO:set the total price to display=>
-            binding.priceAmount.text =
+            binding.priceAmount.text = "EUR ${viewModel.totalPrice}"
             }
         }
 
@@ -81,7 +81,7 @@ class CartFragment : Fragment() {
         this part is in the adapter
         lifecycleScope.launchWhenResumed {
             viewModel.quantityOfSelectedItems.collectLatest {
-                //TODO:set the quantity of items to buy=> binding.itemQuantity.text = ""
+                //TODO:set the quantity of items to buy=> binding.itemQuantity.text = "x ${viewModel.quantityOfSelectedItems}"
             }
         }*/
 
