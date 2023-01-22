@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isInvisible
+import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -65,15 +66,20 @@ class CartFragment : Fragment() {
 
         lifecycleScope.launchWhenResumed {
             viewModel.displayEmptyCart.collectLatest {
+                //TODO remove the hard code here with a function in viewmodel
                 binding.cartIcon.isInvisible = it
                 binding.cartEmptyText.isInvisible = it
+                binding.priceAmount.isVisible  = it
+                binding.buyButtonCart.isVisible = it
+                binding.priceLabel.isVisible = it
+                binding.priceAmount.isVisible = it
             }
         }
 
         lifecycleScope.launchWhenResumed {
             viewModel.totalPrice.collectLatest {
-               //TODO:set the total price to display=>
-            binding.priceAmount.text = "EUR ${viewModel.totalPrice}"
+                //TODO correct the value to display as total price
+                binding.priceAmount.text = "EUR ${viewModel.totalPrice}"
             }
         }
 

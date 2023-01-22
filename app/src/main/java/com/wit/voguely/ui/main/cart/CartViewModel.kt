@@ -20,6 +20,7 @@ class CartViewModel : ViewModel() {
     private var _totalPrice = MutableStateFlow<String>("")
     val totalPrice : StateFlow<String> = _totalPrice
 
+
     private var _quantityOfSelectedItems = MutableStateFlow<String>("")
     val quantityOfSelectedItems : StateFlow<String> = _quantityOfSelectedItems
 
@@ -50,13 +51,13 @@ class CartViewModel : ViewModel() {
 
             }
 
-    fun totalPriceCalculation(){
+   /* fun totalPriceCalculation(){
         for (item in selectedItems){
             val itemPrice = item.price.toInt()
             _totalPrice.value += itemPrice.toString()
         }
 
-        }
+        } */
 
     fun cancelItemFromCart(){
 
