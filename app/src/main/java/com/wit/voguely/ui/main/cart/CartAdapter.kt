@@ -1,12 +1,13 @@
 package com.wit.voguely.ui.main.cart
 
-import android.icu.lang.UCharacter.GraphemeClusterBreak.L
+
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.wit.voguely.databinding.RecyclerViewSingleItemCartBinding
 import com.wit.voguely.ui.main.home.Product
+import io.paperdb.Paper
 
 class CartAdapter :RecyclerView.Adapter<CartAdapter.ViewHolder> () {
     var onItemClick: ((Product)-> Unit)? = null
@@ -16,15 +17,24 @@ class CartAdapter :RecyclerView.Adapter<CartAdapter.ViewHolder> () {
     inner class ViewHolder(val binding: RecyclerViewSingleItemCartBinding) :
             RecyclerView.ViewHolder(binding.root) {
                 init {
-                    /* binding.itemPic.setOnClickListener{
+                    /*
+                    binding.itemPicCart.setOnClickListener{
                         onItemClick?.invoke(dataCart[adapterPosition])
                     }*/
 
+                    fun bindProduct(product: Product){
+                        binding.itemPicCart.setOnClickListener{ view ->
+                            val item = CartItem(product)
+                            ShoppingCart.addItem(item)
+                        }
+                        binding.cancelIcon.setOnClickListener {view->
+                            val item = CartItem(product)
+                            ShoppingCart.removeItem(item, itemView.context)
+                        }
 
-
-                    binding.cancelIcon.setOnClickListener{
-                        //TODO create the function for removing item from list in cart
+                        binding.itemQuantityCart.text = ShoppingCart.getShoppingCartSize().toString()
                     }
+
 
                 }
             }

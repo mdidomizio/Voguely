@@ -81,7 +81,7 @@ class CartFragment : Fragment() {
         this part is in the adapter
         lifecycleScope.launchWhenResumed {
             viewModel.quantityOfSelectedItems.collectLatest {
-                //TODO:set the quantity of items to buy=> binding.itemQuantity.text = "x ${viewModel.quantityOfSelectedItems}"
+                binding.itemQuantity.text = "x ${viewModel.quantityOfSelectedItems}"
             }
         }*/
 
