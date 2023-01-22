@@ -39,6 +39,10 @@ class CartViewModel : ViewModel() {
 
         }
 
+    fun cancelItemFromCart(){
+
+    }
+
     fun totalPriceCalculation(){
 
     }

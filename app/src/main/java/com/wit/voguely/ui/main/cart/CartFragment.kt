@@ -60,17 +60,18 @@ class CartFragment : Fragment() {
 
         lifecycleScope.launchWhenResumed {
             viewModel.totalPrice.collectLatest {
-               //TODO:set the total price to display=> binding.priceAmount.text = ""
+               //TODO:set the total price to display=>
+            binding.priceAmount.text = ""
             }
         }
 
+        /*
+        this part is in the adapter
         lifecycleScope.launchWhenResumed {
             viewModel.quantityOfSelectedItems.collectLatest {
                 //TODO:set the quantity of items to buy=> binding.itemQuantity.text = ""
             }
-        }
-
-        binding.cancelIcon?.set
+        }*/
 
         binding.buyButtonCart?.setOnClickListener {
             viewModel.buyItemsInCart()

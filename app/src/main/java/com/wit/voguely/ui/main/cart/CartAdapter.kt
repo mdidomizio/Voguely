@@ -16,7 +16,7 @@ class CartAdapter :RecyclerView.Adapter<CartAdapter.ViewHolder> () {
     inner class ViewHolder(val binding: RecyclerViewSingleItemCartBinding) :
             RecyclerView.ViewHolder(binding.root) {
                 init {
-                    binding.itemPic.setOnClickListener{
+                    binding.itemPicCart.setOnClickListener{
                         onItemClick?.invoke(dataCart[adapterPosition])
                     }
 
@@ -36,15 +36,15 @@ class CartAdapter :RecyclerView.Adapter<CartAdapter.ViewHolder> () {
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.binding.itemName.text = dataCart[position].itemName
-        holder.binding.itemPrice.text = dataCart[position].price
+        holder.binding.itemNameCart.text = dataCart[position].itemName
+        holder.binding.itemPriceCart.text = dataCart[position].price
        //TODO create a variable for the amount of items selected in the cart=>
         // holder.binding.itemQuantity.text = ""
 
         Glide
             .with(holder.itemView.context)
             .load(dataCart[position].urls)
-            .into(holder.binding.itemPic)
+            .into(holder.binding.itemPicCart)
 
     }
 
