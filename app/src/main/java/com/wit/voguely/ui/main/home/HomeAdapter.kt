@@ -12,13 +12,15 @@ class HomeAdapter : RecyclerView.Adapter<HomeAdapter.ViewHolder> () {
 
     inner class ViewHolder(val binding: RecyclerViewSingleItemLayoutBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        init {
+       init {
             binding.itemPic.setOnClickListener {
                 onItemClick?.invoke(data[adapterPosition])
             }
 
         }
     }
+
+
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
             val binding = RecyclerViewSingleItemLayoutBinding.inflate(

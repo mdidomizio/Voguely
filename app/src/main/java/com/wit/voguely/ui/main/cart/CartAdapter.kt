@@ -16,9 +16,11 @@ class CartAdapter :RecyclerView.Adapter<CartAdapter.ViewHolder> () {
     inner class ViewHolder(val binding: RecyclerViewSingleItemCartBinding) :
             RecyclerView.ViewHolder(binding.root) {
                 init {
-                    binding.itemPicCart.setOnClickListener{
+                    /* binding.itemPic.setOnClickListener{
                         onItemClick?.invoke(dataCart[adapterPosition])
-                    }
+                    }*/
+
+
 
                     binding.cancelIcon.setOnClickListener{
                         //TODO create the function for removing item from list in cart
@@ -39,7 +41,7 @@ class CartAdapter :RecyclerView.Adapter<CartAdapter.ViewHolder> () {
         holder.binding.itemNameCart.text = dataCart[position].itemName
         holder.binding.itemPriceCart.text = dataCart[position].price
        //TODO create a variable for the amount of items selected in the cart=>
-        // holder.binding.itemQuantity.text = ""
+        holder.binding.itemQuantityCart.text = ""
 
         Glide
             .with(holder.itemView.context)

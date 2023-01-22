@@ -12,12 +12,14 @@ import androidx.navigation.fragment.findNavController
 import com.wit.voguely.R
 import com.wit.voguely.databinding.FragmentCartBinding
 import com.wit.voguely.ui.main.MainFragment
+import com.wit.voguely.ui.main.home.HomeAdapter
 import kotlinx.coroutines.flow.collectLatest
 
 
 class CartFragment : Fragment() {
 
     val adapter = CartAdapter()
+    val homeAdapter = HomeAdapter()
     private var activity : MainFragment? = null
     private lateinit var binding : FragmentCartBinding
     private lateinit var viewModel : CartViewModel
@@ -41,16 +43,26 @@ class CartFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.recyclerviewCart?.adapter = adapter
-        adapter.onItemClick = {
+        homeAdapter.onItemClick = {
             val bundle = Bundle()
             bundle.putString("url", it.urls)
             bundle.putString("Item name", it.itemName)
             bundle.putString("Item price", it.price)
+
+            //TODO=> connect the search screen and the home screen to the cart, at the moment, with navigate, I can only have one connection
             findNavController().navigate(
-               // R.id.action_searchFragment_to_cartFragment,
+              // R.id.action_searchFragment_to_cartFragment,
                 R.id.action_homeFragment_to_cartFragment,
             bundle)
         }
+
+        lifecycleScope.launchWhenResumed {
+            viewModel.itemsInCart.collectLatest {
+                adapter.dataCart = it
+                adapter.notifyItemInserted(it.size)
+            }
+        }
+
         lifecycleScope.launchWhenResumed {
             viewModel.displayEmptyCart.collectLatest {
                 binding.cartIcon.isInvisible = it
@@ -61,7 +73,7 @@ class CartFragment : Fragment() {
         lifecycleScope.launchWhenResumed {
             viewModel.totalPrice.collectLatest {
                //TODO:set the total price to display=>
-            binding.priceAmount.text = ""
+            binding.priceAmount.text =
             }
         }
 
