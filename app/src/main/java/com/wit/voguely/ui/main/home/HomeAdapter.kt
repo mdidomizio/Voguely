@@ -16,6 +16,7 @@ class HomeAdapter : RecyclerView.Adapter<HomeAdapter.ViewHolder> () {
             binding.itemPic.setOnClickListener {
                 onItemClick?.invoke(data[adapterPosition])
             }
+
         }
     }
 

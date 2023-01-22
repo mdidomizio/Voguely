@@ -10,6 +10,7 @@ import com.wit.voguely.ui.main.home.Product
 
 class CartAdapter :RecyclerView.Adapter<CartAdapter.ViewHolder> () {
     var onItemClick: ((Product)-> Unit)? = null
+
     var dataCart: List<Product> = listOf()
 
     inner class ViewHolder(val binding: RecyclerViewSingleItemCartBinding) :
@@ -18,6 +19,11 @@ class CartAdapter :RecyclerView.Adapter<CartAdapter.ViewHolder> () {
                     binding.itemPic.setOnClickListener{
                         onItemClick?.invoke(dataCart[adapterPosition])
                     }
+
+                    binding.cancelIcon.setOnClickListener{
+                        //TODO create the function for removing item from list in cart
+                    }
+
                 }
             }
 
@@ -32,6 +38,8 @@ class CartAdapter :RecyclerView.Adapter<CartAdapter.ViewHolder> () {
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.binding.itemName.text = dataCart[position].itemName
         holder.binding.itemPrice.text = dataCart[position].price
+       //TODO create a variable for the amount of items selected in the cart=>
+        // holder.binding.itemQuantity.text = ""
 
         Glide
             .with(holder.itemView.context)
