@@ -47,6 +47,11 @@ class LoginSignupFragment : Fragment() {
 
             }
         }
+        lifecycleScope.launch{
+            viewModel.event.collectLatest { event->
+                setEvent(event)
+            }
+        }
 
 
         binding.tabs.addOnTabSelectedListener(
