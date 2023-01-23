@@ -44,7 +44,7 @@ class CartFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.recyclerviewCart?.adapter = adapter
-        homeAdapter.onItemClick = {
+        adapter.onItemClick = {
             val bundle = Bundle()
             bundle.putString("url", it.urls)
             bundle.putString("Item name", it.itemName)
@@ -67,12 +67,12 @@ class CartFragment : Fragment() {
         lifecycleScope.launchWhenResumed {
             viewModel.displayEmptyCart.collectLatest {
                 //TODO remove the hard code here with a function in viewmodel
-                binding.cartIcon.isInvisible = it
-                binding.cartEmptyText.isInvisible = it
-                binding.priceAmount.isVisible  = it
+                binding.cartIcon.isVisible = it
+                binding.cartEmptyText.isVisible = it
+             /*   binding.priceAmount.isVisible  = it
                 binding.buyButtonCart.isVisible = it
                 binding.priceLabel.isVisible = it
-                binding.priceAmount.isVisible = it
+                binding.priceAmount.isVisible = it */
             }
         }
 

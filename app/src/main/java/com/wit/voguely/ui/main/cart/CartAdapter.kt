@@ -51,7 +51,7 @@ class CartAdapter :RecyclerView.Adapter<CartAdapter.ViewHolder> () {
         holder.binding.itemNameCart.text = dataCart[position].itemName
         holder.binding.itemPriceCart.text = dataCart[position].price
        //TODO create a variable for the amount of items selected in the cart=>
-        holder.binding.itemQuantityCart.text = ""
+        holder.binding.itemQuantityCart.text = "x1"
 
         Glide
             .with(holder.itemView.context)

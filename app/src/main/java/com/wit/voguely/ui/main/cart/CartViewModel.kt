@@ -11,7 +11,7 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 class CartViewModel : ViewModel() {
-    private var _itemsInCart = MutableStateFlow<List<Product>>(listOf())
+    private var _itemsInCart = MutableStateFlow<List<Product>>(emptyList())
     val itemsInCart : StateFlow<List<Product>> = _itemsInCart
 
     private var _displayEmptyCart = MutableStateFlow(false)
@@ -26,8 +26,20 @@ class CartViewModel : ViewModel() {
 
     val selectedItems : List<Product> = listOf()
 
+    init{
+        loadCart()
+    }
+    fun loadCart(){
+        viewModelScope.launch {
+            _itemsInCart.update { mockData }
+            _displayEmptyCart.value = false
 
-    fun addItemToCart(){
+        }
+
+    }
+
+
+  /* fun addItemToCart(){
 
         viewModelScope.launch {
             _displayEmptyCart.value = true
@@ -51,7 +63,7 @@ class CartViewModel : ViewModel() {
 
             }
 
-   /* fun totalPriceCalculation(){
+   fun totalPriceCalculation(){
         for (item in selectedItems){
             val itemPrice = item.price.toInt()
             _totalPrice.value += itemPrice.toString()
