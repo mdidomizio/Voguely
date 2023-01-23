@@ -79,7 +79,8 @@ class CartFragment : Fragment() {
         lifecycleScope.launchWhenResumed {
             viewModel.totalPrice.collectLatest {
                 //TODO correct the value to display as total price
-                binding.priceAmount.text = "EUR ${viewModel.totalPrice}"
+               // binding.priceAmount.text = "EUR ${viewModel.totalPrice}"
+                binding.priceAmount.text = "EUR 300"
             }
         }
 
