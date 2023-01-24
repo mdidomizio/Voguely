@@ -82,14 +82,21 @@ class LoginSignupFragment : Fragment() {
         }
         }
 
-    private fun accessToMain(){
+    private fun accessToMainFromLogin(){
         findNavController().navigate(R.id.action_loginSignupFragment_to_mainFragment2)
     }
 
+    private fun accessToMainFromSplash(){
+        findNavController().navigate(R.id.action_splashFragment_to_mainFragment2)
+    }
+
+
+
     private fun setEvent(event: LoginEvent){
         when(event){
-            is LoginSuccessful -> accessToMain()
+            is LoginSuccessful -> accessToMainFromLogin()
             is LoginError -> Toast.makeText(requireContext(), event.errorMessage, Toast.LENGTH_SHORT).show()
+            is LoggedIn -> accessToMainFromSplash()
         }
     }
 

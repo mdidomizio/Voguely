@@ -1,8 +1,9 @@
 package com.wit.voguely.ui.login
 
+import android.widget.Toast
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.Dispatchers
@@ -35,10 +36,12 @@ class LoginViewModel : ViewModel() {
         }
     }
 
-    fun login(email: String, password: String) =
+
+
+    private fun login(email: String, password: String) =
         viewModelScope.launch (Dispatchers.Main) {
             try {
-                val result = Firebase.auth
+                val auth = Firebase.auth
                     .signInWithEmailAndPassword(email, password)
                     .await()
                 _event.emit(LoginSuccessful())
@@ -47,10 +50,10 @@ class LoginViewModel : ViewModel() {
             }
         }
 
-    fun signUp(email: String, password: String) =
+    private fun signUp(email: String, password: String) =
         viewModelScope.launch (Dispatchers.Main){
             try {
-                val result = Firebase.auth
+                val auth = Firebase.auth
                     .createUserWithEmailAndPassword(email, password)
                     .await()
                 _event.emit(LoginSuccessful())
@@ -59,4 +62,23 @@ class LoginViewModel : ViewModel() {
             }
 
         }
+
+    private suspend fun isLoggedIn () =
+        viewModelScope.launch(Dispatchers.Main){
+            try{
+                val auth = Firebase.auth
+                val currentUser = auth.currentUser
+                if(currentUser != null) {
+                    _event.emit(LoggedIn())
+                }
+            }catch (e: Exception){
+                _event.emit(LoggedIn(e.localizedMessage))
+            }
+
+        }
+
+
+
+
+
 }
