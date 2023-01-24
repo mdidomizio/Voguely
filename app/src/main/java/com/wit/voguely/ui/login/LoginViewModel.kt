@@ -64,7 +64,10 @@ class LoginViewModel : ViewModel() {
         }
 
     private suspend fun isLoggedIn () =
-        viewModelScope.launch(Dispatchers.Main){
+
+
+
+       /* viewModelScope.launch(Dispatchers.Main){
             try{
                 val auth = Firebase.auth
                 val currentUser = auth.currentUser
@@ -75,7 +78,7 @@ class LoginViewModel : ViewModel() {
                 _event.emit(LoggedIn(e.localizedMessage))
             }
 
-        }
+        }*/
 
 
 

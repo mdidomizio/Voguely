@@ -37,7 +37,8 @@ class SplashFragment : Fragment() {
             .withEndAction(
                 Runnable {
                     binding.logo.animate().alpha(0.0F).setDuration(2000)
-                        .withEndAction({findNavController().navigate(R.id.action_splashFragment_to_loginSignupFragment)}).start()
+                        .withEndAction { findNavController().navigate(R.id.action_splashFragment_to_loginSignupFragment) }
+                        .start()
                 }).start()
     }
 
