@@ -21,4 +21,21 @@ class LoginViewModel : ViewModel() {
 
     }
 
+    fun onActionButtonClicked(email: String, password: String){
+        viewModelScope.launch{
+            when(selectedTab.value){
+                SelectedTab.LOGIN -> login(email, password)
+                SelectedTab.SIGN_UP -> signUp(email, password)
+
+            }
+        }
+    }
+
+    fun signUp(email: String, password: String) {
+        viewModelScope.launch{
+
+        }
+    }
+
+
 }
