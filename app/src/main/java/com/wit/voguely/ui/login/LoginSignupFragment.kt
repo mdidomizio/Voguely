@@ -89,7 +89,7 @@ class LoginSignupFragment : Fragment() {
     private fun setEvent(event: LoginEvent){
         when(event){
             is LoginSuccessful -> accessToMain()
-            is LoginError -> Toast.makeText(requireContext(), "Your Login failed", Toast.LENGTH_SHORT).show()
+            is LoginError -> Toast.makeText(requireContext(), event.errorMessage, Toast.LENGTH_SHORT).show()
         }
     }
 
