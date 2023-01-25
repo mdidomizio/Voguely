@@ -12,10 +12,14 @@
         tools:layout="@layout/fragment_splash" >
         <action
             android:id="@+id/action_splashFragment_to_loginSignupFragment"
-            app:destination="@id/loginSignupFragment" />
+            app:destination="@id/loginSignupFragment"
+            app:popUpTo="@id/splashFragment"
+            app:popUpToInclusive="true"/>
         <action
             android:id="@+id/action_splashFragment_to_mainFragment2"
-            app:destination="@id/mainFragment2" />
+            app:destination="@id/mainFragment2"
+            app:popUpTo="@id/splashFragment"
+            app:popUpToInclusive="true"/>
     </fragment>
     <fragment
         android:id="@+id/loginSignupFragment"
@@ -24,7 +28,10 @@
         tools:layout="@layout/fragment_login_signup" >
         <action
             android:id="@+id/action_loginSignupFragment_to_mainFragment2"
-            app:destination="@id/mainFragment2" />
+            app:destination="@id/mainFragment2"
+            app:popUpTo="@id/splashFragment"
+            app:popUpToInclusive="false"
+            />
     </fragment>
     <fragment
         android:id="@+id/mainFragment2"
@@ -33,10 +40,13 @@
         tools:layout="@layout/fragment_main" >
         <action
             android:id="@+id/action_mainFragment2_to_productDetailsFragment"
-            app:destination="@id/productDetailsFragment" />
+            app:destination="@id/productDetailsFragment"
+            />
         <action
             android:id="@+id/action_mainFragment2_to_loginSignupFragment2"
-            app:destination="@id/loginSignupFragment" />
+            app:destination="@id/loginSignupFragment"
+            app:popUpTo="@id/splashFragment"
+            app:popUpToInclusive="false"/>
     </fragment>
     <fragment
         android:id="@+id/productDetailsFragment"
