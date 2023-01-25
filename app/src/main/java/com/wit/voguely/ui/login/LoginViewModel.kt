@@ -43,75 +43,27 @@ class LoginViewModel : ViewModel() {
 
 
     private fun login(email: String, password: String) =
-        viewModelScope.launch (Dispatchers.Main) {
+        viewModelScope.launch (Dispatchers.IO) {
             try {
                 val auth = Firebase.auth
                     .signInWithEmailAndPassword(email, password)
                     .await()
-                _event.emit(LoginSuccessful())
+                _event.emit(LoginEvent.LoginSuccessful)
             }catch(e: Exception){
-                _event.emit(LoginError(e.localizedMessage))
+                _event.emit(LoginEvent.LoginError(e.localizedMessage))
             }
         }
 
     private fun signUp(email: String, password: String) =
-        viewModelScope.launch (Dispatchers.Main){
+        viewModelScope.launch (Dispatchers.IO){
             try {
                 val auth = Firebase.auth
                     .createUserWithEmailAndPassword(email, password)
                     .await()
-                _event.emit(LoginSuccessful())
+                _event.emit(LoginEvent.LoginSuccessful)
             }catch (e: Exception){
-                _event.emit(LoginError(e.localizedMessage))
+                _event.emit(LoginEvent.LoginError(e.localizedMessage))
             }
 
         }
-
-   /* private suspend fun isLoggedIn () =
-        viewModelScope.launch (Dispatchers.Main) {
-            try{
-                FirebaseAuth.getInstance().getCurrentUser()!= null
-                    _event.emit(LoggedIn())
-
-                /*splash_logo.alpha = 0f
-                splash_logo.animate().setDuration(3000).alpha(1f).withEndAction {
-                    val intent = Intent(this, HomeActivity::class.java)
-                    startActivity(intent)
-                    overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right)
-                    finish() */
-
-            }catch(e: Exception){
-                _event.emit(LoggedOut(e.localizedMessage))
-
-              /*  splash_logo.alpha = 0f
-                splash_logo.animate().setDuration(3000).alpha(1f).withEndAction {
-                    val intent = Intent(this, MainActivity::class.java)
-                    startActivity(intent)
-                    overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right)
-                    finish() */
-
-
-            }
-    } */
-
-
-
-       /* private suspend fun isLoggedIn () =
-       viewModelScope.launch(Dispatchers.Main){
-            try{
-                val auth = Firebase.auth
-                val currentUser = auth.currentUser
-                if(currentUser != null) {
-                    _event.emit(LoggedIn())
-                }
-            }catch (e: Exception){
-                _event.emit(LoggedIn(e.localizedMessage))
-            }
-
-        }*/
-
-
-
-
-
 }

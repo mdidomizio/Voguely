@@ -86,23 +86,18 @@ class LoginSignupFragment : Fragment() {
         findNavController().navigate(R.id.action_loginSignupFragment_to_mainFragment2)
     }
 
-    private fun accessToMainFromSplash(){
-        findNavController().navigate(R.id.action_splashFragment_to_mainFragment2)
-    }
 
 
 
     private fun setEvent(event: LoginEvent){
         when(event){
-            is LoginSuccessful -> accessToMainFromLogin()
-            is LoginError -> Toast.makeText(requireContext(), event.errorMessage, Toast.LENGTH_SHORT).show()
-            is LoggedIn -> accessToMainFromSplash()
+            is LoginEvent.LoginSuccessful -> accessToMainFromLogin()
+            is LoginEvent.LoginError -> Toast.makeText(requireContext(), event.errorMessage, Toast.LENGTH_SHORT).show()
         }
     }
 
 
     private fun setSelectedTabText (selectedTab: SelectedTab){
-
         binding.welcomeBackText.setText(selectedTab.welcomeMessage)
         binding.actionButton.setText(selectedTab.buttonText)
 

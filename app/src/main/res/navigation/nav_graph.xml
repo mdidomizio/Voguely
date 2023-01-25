@@ -30,5 +30,16 @@
         android:id="@+id/mainFragment2"
         android:name="com.wit.voguely.ui.main.MainFragment"
         android:label="fragment_main"
-        tools:layout="@layout/fragment_main" />
+        tools:layout="@layout/fragment_main" >
+        <action
+            android:id="@+id/action_mainFragment2_to_productDetailsFragment"
+            app:destination="@id/productDetailsFragment" />
+        <action
+            android:id="@+id/action_mainFragment2_to_loginSignupFragment2"
+            app:destination="@id/loginSignupFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/productDetailsFragment"
+        android:name="com.wit.voguely.ui.main.ProductDetailsFragment"
+        android:label="ProductDetailsFragment" />
 </navigation>
