@@ -21,13 +21,9 @@ class MainFragment : Fragment() {
 
     lateinit var binding : FragmentMainBinding
 
-
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -48,6 +44,7 @@ class MainFragment : Fragment() {
         val navController = navHostFragment.findNavController()
 
         binding.bottomNav.setupWithNavController(navController)
+        binding.toolbar.setupWithNavController(navController)
     }
 
 
