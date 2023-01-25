@@ -1,22 +1,18 @@
 package com.wit.voguely.ui.main
-
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.wit.voguely.R
 import com.wit.voguely.databinding.FragmentMainBinding
 import com.wit.voguely.ui.MainViewModel
-import com.wit.voguely.ui.main.cart.CartFragment
-import com.wit.voguely.ui.main.home.HomeFragment
-import com.wit.voguely.ui.main.search.SearchFragment
+
 
 
 class MainFragment : Fragment() {
@@ -29,6 +25,7 @@ class MainFragment : Fragment() {
         super.onCreate(savedInstanceState)
         viewModel = ViewModelProvider(this)[MainViewModel:: class.java]
     }
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -48,7 +45,8 @@ class MainFragment : Fragment() {
             childFragmentManager.findFragmentById(R.id.fragmentNavigation) as NavHostFragment
         val navController = navHostFragment.findNavController()
         binding.bottomNav.setupWithNavController(navController)
-        binding.toolbar.setupWithNavController(navController)
+        val appBarConfiguration = AppBarConfiguration(binding.bottomNav.menu)
+        binding.toolbar.setupWithNavController(navController, appBarConfiguration)
 
         signOutToolbar()
 
@@ -61,6 +59,12 @@ class MainFragment : Fragment() {
             findNavController().navigate(R.id.action_mainFragment2_to_loginSignupFragment2)
             return@setOnMenuItemClickListener false
         }
+
+    }
+
+    companion object {
+        val appBarConfiguration =
+            AppBarConfiguration(setOf(R.id.homeFragment, R.id.searchFragment, R.id.cartFragment))
     }
 
 
