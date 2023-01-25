@@ -62,10 +62,4 @@ class MainFragment : Fragment() {
 
     }
 
-    companion object {
-        val appBarConfiguration =
-            AppBarConfiguration(setOf(R.id.homeFragment, R.id.searchFragment, R.id.cartFragment))
-    }
-
-
 }
