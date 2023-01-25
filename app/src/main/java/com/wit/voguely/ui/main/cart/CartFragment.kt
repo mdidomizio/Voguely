@@ -69,10 +69,10 @@ class CartFragment : Fragment() {
                 //TODO remove the hard code here with a function in viewmodel
                 binding.cartIcon.isVisible = it
                 binding.cartEmptyText.isVisible = it
-             /*   binding.priceAmount.isVisible  = it
-                binding.buyButtonCart.isVisible = it
-                binding.priceLabel.isVisible = it
-                binding.priceAmount.isVisible = it */
+             /* binding.priceAmount.isInvisible  = it
+                binding.buyButtonCart.isInvisible = it
+                binding.priceLabel.isInvisible = it
+                binding.greyArea.isInvisible = it */
             }
         }
 

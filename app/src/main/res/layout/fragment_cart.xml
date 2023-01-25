@@ -11,13 +11,14 @@
         android:id="@+id/recyclerview_cart"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
         android:orientation="vertical"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/grey_area"
          />
 
 
@@ -41,11 +42,20 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 
+    <View
+        android:id="@+id/grey_area"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="#D9D9D9"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+
     <TextView
         android:id="@+id/price_label"
-        android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:background="#D9D9D9"
+        android:layout_width="wrap_content"
+        android:layout_height="60dp"
         android:gravity="center_vertical"
         android:paddingLeft="20dp"
         android:text="Total Price:"
@@ -79,7 +89,7 @@
         android:layout_marginRight="20dp"
         android:layout_marginTop="25dp"
         android:background="@drawable/roundstyle"
-        app:layout_constraintEnd_toEndOf="@id/price_label"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBaseline_toBaselineOf="@id/price_label"
         app:layout_constraintBottom_toBottomOf="parent"/>
 

@@ -28,8 +28,8 @@
 
         <ImageView
             android:id="@+id/item_pic_cart"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
+            android:layout_width="170dp"
+            android:layout_height="170dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             />
@@ -39,7 +39,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="AirPods Max"
-            android:textSize="15dp"
+            android:textStyle="bold"
             android:layout_marginStart="10dp"
             android:textColor="#0C1A30"
             android:layout_marginTop="10dp"
@@ -53,7 +53,7 @@
             android:text="EUR 300"
             android:layout_marginStart="10dp"
             android:textColor="#FE3A30"
-            android:textSize="15dp"
+            android:textStyle="bold"
             app:layout_constraintStart_toEndOf="@id/item_pic_cart"
             app:layout_constraintTop_toBottomOf="@id/item_name_cart"/>
 
