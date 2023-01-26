@@ -50,4 +50,19 @@ class SearchViewModel : ViewModel() {
 
 
 
+/*fun searchItem(searchQuery: CharSequence) {
+        viewModelScope.launch {
+            if(searchQuery.isBlank()){
+                _displayNoResultFound.value = false
+                _itemSearched.value = ListOf<Product>()
+                return@launch
+            }
+            var searchResults = mockData.filter{
+                it.name.contains(searchQuery, ignoreCase = true)
+            }
+            _itemSearched.update {searchResults}
+             _displayNoResultFound.value = searchResults.isEmpty()
+
+}} */
+
 
