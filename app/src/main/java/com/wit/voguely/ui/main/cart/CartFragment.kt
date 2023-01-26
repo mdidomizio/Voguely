@@ -46,9 +46,9 @@ class CartFragment : Fragment() {
         binding.recyclerviewCart?.adapter = adapter
         adapter.onItemClick = {
             val bundle = Bundle()
-            bundle.putString("url", it.urls)
-            bundle.putString("Item name", it.itemName)
-            bundle.putString("Item price", it.price)
+            bundle.putString("url", it.image)
+            bundle.putString("Item name", it.name)
+            bundle.putString("Item price", it.price.toString())
 
             //TODO=> connect the search screen and the home screen to the cart, at the moment, with navigate, I can only have one connection
             findNavController().navigate(

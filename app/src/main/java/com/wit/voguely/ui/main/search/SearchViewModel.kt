@@ -3,7 +3,6 @@ package com.wit.voguely.ui.main.search
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.wit.voguely.ui.main.home.Product
-import com.wit.voguely.ui.main.home.mockData
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -32,8 +31,8 @@ class SearchViewModel : ViewModel() {
                 // When a search exists
                 _itemSearched.update {
                     // Get the results
-                    val foundItems = mockData.filter { product ->
-                        product.itemName.lowercase().contains(searchTerm.lowercase())
+                    val foundItems = emptyList<Product>().filter { product ->
+                        product.name.lowercase().contains(searchTerm.lowercase())
                     }
 
                     // When there are no results, show the no results label again

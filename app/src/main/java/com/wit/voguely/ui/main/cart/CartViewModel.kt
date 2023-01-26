@@ -4,7 +4,6 @@ import android.widget.Toast
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.wit.voguely.ui.main.home.Product
-import com.wit.voguely.ui.main.home.mockData
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
@@ -31,7 +30,7 @@ class CartViewModel : ViewModel() {
     }
     fun loadCart(){
         viewModelScope.launch {
-            _itemsInCart.update { mockData }
+            _itemsInCart.update { emptyList() }
             _displayEmptyCart.value = false
 
         }

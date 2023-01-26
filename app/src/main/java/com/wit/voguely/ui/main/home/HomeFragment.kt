@@ -48,9 +48,9 @@ class HomeFragment : Fragment() {
 
         adapter.onItemClick = {
             val bundle = Bundle()
-            bundle.putString("url", it.urls )
-            bundle.putString("itemName", it.itemName)
-            bundle.putString("itemPrice", it.price)
+            bundle.putString("url", it.image )
+            bundle.putString("itemName", it.name)
+            bundle.putString("itemPrice", it.price.toString())
             findNavController().navigate(R.id.action_homeFragment_to_cartFragment)
         }
 

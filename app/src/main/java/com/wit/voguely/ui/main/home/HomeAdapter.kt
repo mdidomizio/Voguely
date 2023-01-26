@@ -33,14 +33,14 @@ class HomeAdapter : RecyclerView.Adapter<HomeAdapter.ViewHolder> () {
 
         override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
-            holder.binding.itemName.text = data[position].itemName
-            holder.binding.itemPrice.text = data[position].price
-            holder.binding.itemRate.text = data[position].rate
-            holder.binding.itemReviews.text = data[position].review
+            holder.binding.itemName.text = data[position].name
+            holder.binding.itemPrice.text = data[position].price.toString()
+            holder.binding.itemRate.text = data[position].rating.toString()
+            holder.binding.itemReviews.text = data[position].reviews.toString()
 
             Glide
                 .with(holder.itemView.context)
-                .load(data[position].urls)
+                .load(data[position].image)
                 .into(holder.binding.itemPic)
         }
 

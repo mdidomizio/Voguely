@@ -48,14 +48,14 @@ class CartAdapter :RecyclerView.Adapter<CartAdapter.ViewHolder> () {
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.binding.itemNameCart.text = dataCart[position].itemName
-        holder.binding.itemPriceCart.text = dataCart[position].price
+        holder.binding.itemNameCart.text = dataCart[position].name
+        holder.binding.itemPriceCart.text = dataCart[position].price.toString()
        //TODO create a variable for the amount of items selected in the cart=>
         holder.binding.itemQuantityCart.text = "x1"
 
         Glide
             .with(holder.itemView.context)
-            .load(dataCart[position].urls)
+            .load(dataCart[position].image)
             .into(holder.binding.itemPicCart)
 
     }
