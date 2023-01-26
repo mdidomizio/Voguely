@@ -2,6 +2,8 @@ package com.wit.voguely.ui.main.search
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.wit.voguely.remote.ProductDataSource
+import com.wit.voguely.remote.ProductsDataSource
 import com.wit.voguely.ui.main.home.Product
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -10,7 +12,10 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 class SearchViewModel : ViewModel() {
-    private val _itemSearched = MutableStateFlow<List<Product>>(listOf())
+
+    private val productsDataSource = ProductsDataSource()
+
+    private val _itemSearched = MutableStateFlow <List<Product>> (emptyList())
     val itemSearched: StateFlow<List<Product>> = _itemSearched.asStateFlow()
 
     private var _displayNoResultFound = MutableStateFlow(false)
@@ -22,17 +27,18 @@ class SearchViewModel : ViewModel() {
             // Setting teh no result display to be hidden by default
             _displayNoResultFound.value = false
 
-            if (searchTerm == "") {
+            if (searchTerm.isBlank()) {
                 // When the search is empty, show an empty list
                 _itemSearched.update {
-                    emptyList()
+                    _itemSearched.value = emptyList()
+                    return@launch
                 }
             } else {
                 // When a search exists
                 _itemSearched.update {
                     // Get the results
-                    val foundItems = emptyList<Product>().filter { product ->
-                        product.name.lowercase().contains(searchTerm.lowercase())
+                    val foundItems = productsDataSource.getProducts().filter{
+                        it.name.lowercase().contains(searchTerm.lowercase())
                     }
 
                     // When there are no results, show the no results label again
@@ -64,5 +70,7 @@ class SearchViewModel : ViewModel() {
              _displayNoResultFound.value = searchResults.isEmpty()
 
 }} */
+
+
 
 

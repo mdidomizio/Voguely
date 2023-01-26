@@ -32,7 +32,7 @@ class HomeAdapter : RecyclerView.Adapter<HomeAdapter.ViewHolder> () {
         override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
             holder.binding.itemName.text = data[position].name
-            holder.binding.itemPrice.text = data[position].price.toString()
+            holder.binding.itemPrice.text = "${data[position].currency} ${data[position].price.toString()}"
             holder.binding.itemRate.text = data[position].rating.toString()
             holder.binding.itemReviews.text = data[position].reviews.toString()
 

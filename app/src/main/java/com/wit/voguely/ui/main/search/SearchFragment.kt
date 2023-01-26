@@ -42,16 +42,19 @@ class SearchFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.recyclerviewSearch?.adapter = adapter
-        adapter.onItemClick = {
+
+        /*adapter.onItemClick = {
             val bundle = Bundle()
             bundle.putString("url", it.image)
             bundle.putString("itemName", it.name)
             bundle.putString("itemPrice", it.price.toString())
             findNavController().navigate(R.id.action_searchFragment_to_cartFragment)
-        }
+        }*/
 
         lifecycleScope.launchWhenResumed {
             viewModel.itemSearched.collectLatest {
+
+
                 adapter.data = it
                 adapter.notifyDataSetChanged()
 

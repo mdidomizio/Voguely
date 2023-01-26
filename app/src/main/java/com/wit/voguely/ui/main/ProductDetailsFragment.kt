@@ -8,10 +8,7 @@ import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
-import com.wit.voguely.R
 import com.wit.voguely.databinding.FragmentProductDetailsBinding
-import com.wit.voguely.ui.main.home.HomeAdapter
-import com.wit.voguely.ui.main.search.SearchViewModel
 import kotlinx.coroutines.flow.collectLatest
 
 class ProductDetailsFragment : Fragment() {

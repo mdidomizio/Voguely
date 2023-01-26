@@ -13,7 +13,6 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 class ProductDetailsViewModel : ViewModel() {
-    private val productsDataSource = ProductsDataSource()
 
     private val productDataSource = ProductDataSource()
 
