@@ -8,7 +8,7 @@ import kotlinx.coroutines.tasks.await
 
 class ProductsDataSource {
     suspend fun getProducts():List<Product>{
-        try{
+
             val result = Firebase.database("https://voguely-2f691-default-rtdb.europe-west1.firebasedatabase.app")
                 .getReference("products")
                 .get()
@@ -16,10 +16,7 @@ class ProductsDataSource {
 
             return result.children.mapNotNull{it.getValue(Product::class.java)}
 
-        }catch (e:Exception){
-            Log.d("TAG123", e.toString())
-            return emptyList()
-        }
+
 
     }
 

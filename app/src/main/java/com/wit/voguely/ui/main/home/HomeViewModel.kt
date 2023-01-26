@@ -34,15 +34,5 @@ class HomeViewModel : ViewModel() {
 
     }
 
-   /* fun dataLoad() {
-        _displayProgressBar.value = true
-        viewModelScope.launch{
-            //TODO by fetching => viewModelScope.launch(Dispatchers.IO){
-            //            val data = API.api.getRandomPic()
-            val currentValue = _dataLive.value.toMutableList()
-            currentValue.add(_dataLive)
-            _dataLive.value = currentValue
-            _displayProgressBar.value = false
-        }
-    }*/
+
 }

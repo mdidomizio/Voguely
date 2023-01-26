@@ -14,6 +14,7 @@ import com.wit.voguely.databinding.FragmentCartBinding
 import com.wit.voguely.databinding.FragmentHomeBinding
 import com.wit.voguely.ui.main.MainFragment
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.NonDisposableHandle.parent
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.withContext
 
@@ -46,13 +47,8 @@ class HomeFragment : Fragment() {
 
         binding.recyclerview?.adapter = adapter
 
-        adapter.onItemClick = {
-            val bundle = Bundle()
-            bundle.putString("url", it.image )
-            bundle.putString("itemName", it.name)
-            bundle.putString("itemPrice", it.price.toString())
-            findNavController().navigate(R.id.action_homeFragment_to_cartFragment)
-        }
+        adapter.onItemClick = { productClicked(it) }
+
 
         lifecycleScope.launchWhenResumed {
             viewModel.dataProduct.collectLatest {
@@ -70,5 +66,13 @@ class HomeFragment : Fragment() {
         }
     }
 
+    private fun productClicked(product: Product){
+        val bundle = Bundle()
+        bundle.putString("id", product.id )
+        parentFragment
+            ?.parentFragment
+            ?.findNavController()
+            ?.navigate(R.id.action_mainFragment2_to_productDetailsFragment, bundle)
+    }
 
 }

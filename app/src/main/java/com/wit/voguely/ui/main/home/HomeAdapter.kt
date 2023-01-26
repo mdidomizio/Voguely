@@ -20,8 +20,6 @@ class HomeAdapter : RecyclerView.Adapter<HomeAdapter.ViewHolder> () {
         }
     }
 
-
-
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
             val binding = RecyclerViewSingleItemLayoutBinding.inflate(
                 LayoutInflater.from(parent.context),
