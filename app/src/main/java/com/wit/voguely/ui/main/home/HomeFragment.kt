@@ -1,10 +1,12 @@
 package com.wit.voguely.ui.main.home
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.PopupMenu
 import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
@@ -49,6 +51,8 @@ class HomeFragment : Fragment() {
 
         adapter.onItemClick = { productClicked(it) }
 
+        adapter.onSeeMoreClicked = :: onSeeMoreClicked
+
 
         lifecycleScope.launchWhenResumed {
             viewModel.dataProduct.collectLatest {
@@ -73,6 +77,16 @@ class HomeFragment : Fragment() {
             ?.parentFragment
             ?.findNavController()
             ?.navigate(R.id.action_mainFragment2_to_productDetailsFragment, bundle)
+    }
+
+    @SuppressLint("ResourceType")
+    private fun onSeeMoreClicked (product: Product, view: View){
+        val popUpMenu = PopupMenu(requireContext(), view)
+        val inflater = popUpMenu.menuInflater
+        inflater.inflate(R.menu.pop_up_menu, popUpMenu.menu)
+        popUpMenu.show()
+
+
     }
 
 }

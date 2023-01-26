@@ -1,6 +1,7 @@
 package com.wit.voguely.ui.main.home
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -8,6 +9,9 @@ import com.wit.voguely.databinding.RecyclerViewSingleItemLayoutBinding
 
 class HomeAdapter : RecyclerView.Adapter<HomeAdapter.ViewHolder> () {
     var onItemClick: ((Product) -> Unit)? = null
+    var onSeeMoreClicked: ((Product, View) -> Unit)? = null
+
+
     var data: List<Product> = listOf()
 
     inner class ViewHolder(val binding: RecyclerViewSingleItemLayoutBinding) :
@@ -16,6 +20,9 @@ class HomeAdapter : RecyclerView.Adapter<HomeAdapter.ViewHolder> () {
             binding.itemPic.setOnClickListener {
                 onItemClick?.invoke(data[adapterPosition])
             }
+           binding.seeMoreIcon.setOnClickListener{
+               onSeeMoreClicked?.invoke(data[adapterPosition], it)
+           }
 
         }
     }
@@ -34,12 +41,14 @@ class HomeAdapter : RecyclerView.Adapter<HomeAdapter.ViewHolder> () {
             holder.binding.itemName.text = data[position].name
             holder.binding.itemPrice.text = "${data[position].currency} ${data[position].price.toString()}"
             holder.binding.itemRate.text = data[position].rating.toString()
-            holder.binding.itemReviews.text = data[position].reviews.toString()
+            holder.binding.itemReviews.text = "${data[position].reviews.toString()} reviews"
 
             Glide
                 .with(holder.itemView.context)
                 .load(data[position].image)
                 .into(holder.binding.itemPic)
+
+
         }
 
 

@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.PopupMenu
 import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
@@ -46,6 +47,8 @@ class SearchFragment : Fragment() {
 
         adapter.onItemClick = { productClicked(it) }
 
+        adapter.onSeeMoreClicked = :: onSeeMoreClicked
+
         /*adapter.onItemClick = {
             val bundle = Bundle()
             bundle.putString("url", it.image)
@@ -56,7 +59,6 @@ class SearchFragment : Fragment() {
 
         lifecycleScope.launchWhenResumed {
             viewModel.itemSearched.collectLatest {
-
 
                 adapter.data = it
                 adapter.notifyDataSetChanged()
@@ -101,5 +103,14 @@ class SearchFragment : Fragment() {
             ?.parentFragment
             ?.findNavController()
             ?.navigate(R.id.action_mainFragment2_to_productDetailsFragment, bundle)
+    }
+
+    private fun onSeeMoreClicked (product: Product, view: View){
+        val popUpMenu = PopupMenu(requireContext(), view)
+        val inflater = popUpMenu.menuInflater
+        inflater.inflate(R.menu.pop_up_menu, popUpMenu.menu)
+        popUpMenu.show()
+
+
     }
 }
