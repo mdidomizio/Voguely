@@ -15,6 +15,7 @@ import com.wit.voguely.R
 import com.wit.voguely.databinding.FragmentSearchBinding
 import com.wit.voguely.ui.main.MainFragment
 import com.wit.voguely.ui.main.home.HomeAdapter
+import com.wit.voguely.ui.main.home.Product
 import kotlinx.coroutines.flow.collectLatest
 
 class SearchFragment : Fragment() {
@@ -42,6 +43,8 @@ class SearchFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.recyclerviewSearch?.adapter = adapter
+
+        adapter.onItemClick = { productClicked(it) }
 
         /*adapter.onItemClick = {
             val bundle = Bundle()
@@ -89,5 +92,14 @@ class SearchFragment : Fragment() {
                 binding.warningText.isVisible = it
             }
         }
+    }
+
+    private fun productClicked(product: Product){
+        val bundle = Bundle()
+        bundle.putString("id", product.id )
+        parentFragment
+            ?.parentFragment
+            ?.findNavController()
+            ?.navigate(R.id.action_mainFragment2_to_productDetailsFragment, bundle)
     }
 }
