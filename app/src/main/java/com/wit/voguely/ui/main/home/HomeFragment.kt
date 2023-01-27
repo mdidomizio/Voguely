@@ -79,14 +79,11 @@ class HomeFragment : Fragment() {
             ?.navigate(R.id.action_mainFragment2_to_productDetailsFragment, bundle)
     }
 
-    @SuppressLint("ResourceType")
+
     private fun onSeeMoreClicked (product: Product, view: View){
         val popUpMenu = PopupMenu(requireContext(), view)
-        val inflater = popUpMenu.menuInflater
-        inflater.inflate(R.menu.pop_up_menu, popUpMenu.menu)
+        popUpMenu.menuInflater.inflate(R.menu.pop_up_menu, popUpMenu.menu)
         popUpMenu.show()
-
-
     }
 
 }
