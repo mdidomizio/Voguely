@@ -33,8 +33,10 @@ class ProductDetailsViewModel : ViewModel() {
 
     fun addToCart (){
         viewModelScope.launch (Dispatchers.IO) {
-            dataProduct.value?.let{
-                addToCartDataSource.addItemToCart(it.id)
+            _dataProduct.value.let{
+                if (it != null) {
+                    addToCartDataSource.addItemToCart(it.id)
+                }
             }
         }
     }

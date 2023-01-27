@@ -10,6 +10,7 @@ import android.widget.PopupMenu
 import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.viewModelScope
 import androidx.navigation.fragment.findNavController
 import com.wit.voguely.R
 import com.wit.voguely.databinding.FragmentCartBinding
@@ -18,6 +19,7 @@ import com.wit.voguely.ui.main.MainFragment
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.NonDisposableHandle.parent
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 
@@ -53,7 +55,6 @@ class HomeFragment : Fragment() {
 
         adapter.onSeeMoreClicked = :: onSeeMoreClicked
 
-
         lifecycleScope.launchWhenResumed {
             viewModel.dataProduct.collectLatest {
                 adapter.data = it
@@ -84,6 +85,16 @@ class HomeFragment : Fragment() {
         val popUpMenu = PopupMenu(requireContext(), view)
         popUpMenu.menuInflater.inflate(R.menu.pop_up_menu, popUpMenu.menu)
         popUpMenu.show()
+        popUpMenu.setOnMenuItemClickListener {
+            if(it.itemId == R.id.add_to_cart_popup){
+                viewModel.addToCart(product)
+            }
+            return@setOnMenuItemClickListener true
+        }
     }
+
+
+
+
 
 }

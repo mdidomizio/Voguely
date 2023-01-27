@@ -2,9 +2,11 @@ package com.wit.voguely.ui.main.search
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.wit.voguely.remote.AddToCartDataSource
 import com.wit.voguely.remote.ProductDataSource
 import com.wit.voguely.remote.ProductsDataSource
 import com.wit.voguely.ui.main.home.Product
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -14,6 +16,7 @@ import kotlinx.coroutines.launch
 class SearchViewModel : ViewModel() {
 
     private val productsDataSource = ProductsDataSource()
+    private val addToCartDataSource = AddToCartDataSource()
 
     private val _itemSearched = MutableStateFlow <List<Product>> (emptyList())
     val itemSearched: StateFlow<List<Product>> = _itemSearched.asStateFlow()
@@ -49,6 +52,14 @@ class SearchViewModel : ViewModel() {
                     // Return the results. Works both with results, and when empty
                     foundItems
                 }
+            }
+        }
+    }
+
+    fun addToCart (product: Product){
+        viewModelScope.launch (Dispatchers.IO) {
+            _itemSearched.value.let{
+                addToCartDataSource.addItemToCart(product.id)
             }
         }
     }

@@ -110,6 +110,12 @@ class SearchFragment : Fragment() {
         val inflater = popUpMenu.menuInflater
         inflater.inflate(R.menu.pop_up_menu, popUpMenu.menu)
         popUpMenu.show()
+        popUpMenu.setOnMenuItemClickListener {
+            if(it.itemId == R.id.add_to_cart_popup){
+                viewModel.addToCart(product)
+            }
+            return@setOnMenuItemClickListener true
+        }
 
 
     }

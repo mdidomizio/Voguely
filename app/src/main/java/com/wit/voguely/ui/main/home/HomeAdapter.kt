@@ -24,6 +24,7 @@ class HomeAdapter : RecyclerView.Adapter<HomeAdapter.ViewHolder> () {
                onSeeMoreClicked?.invoke(data[adapterPosition], it)
            }
 
+
         }
     }
 
