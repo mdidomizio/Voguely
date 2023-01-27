@@ -70,6 +70,7 @@
         />
 
     <Button
+        android:id="@+id/add_to_cart_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="add to cart"

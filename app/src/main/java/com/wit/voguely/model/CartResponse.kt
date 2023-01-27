@@ -6,6 +6,6 @@ import com.google.firebase.database.IgnoreExtraProperties
 @IgnoreExtraProperties
 
 data class CartResponse (
-    val ProductId: String = "",
+    val productId: String = "",
     val quantity : Int = 0
         )

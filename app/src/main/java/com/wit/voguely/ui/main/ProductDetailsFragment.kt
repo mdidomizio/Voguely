@@ -54,11 +54,12 @@ class ProductDetailsFragment : Fragment() {
 
                 }
 
-
-
             }
         }
 
+        binding.addToCartButton.setOnClickListener{
+            viewModel.addToCart()
+        }
 
     }
 
