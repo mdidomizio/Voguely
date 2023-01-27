@@ -37,10 +37,7 @@ class AddToCartDataSource {
             cartInDB?.child(itemInCartToCheck.key)
                 ?.setValue(CartResponse(id, itemInCartToCheck.response.quantity + 1))?.await()
         }
-
-
-
-
+        
     }
 }
 

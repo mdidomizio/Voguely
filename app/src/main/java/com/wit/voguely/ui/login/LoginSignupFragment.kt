@@ -21,13 +21,12 @@ import kotlinx.coroutines.launch
 class LoginSignupFragment : Fragment() {
 
     private lateinit var binding: FragmentLoginSignupBinding
-    private lateinit var viewModel : LoginViewModel
-
+    private lateinit var viewModel: LoginViewModel
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel = ViewModelProvider(this)[LoginViewModel:: class.java]
+        viewModel = ViewModelProvider(this)[LoginViewModel::class.java]
 
     }
 
@@ -43,14 +42,14 @@ class LoginSignupFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        lifecycleScope.launch{
+        lifecycleScope.launch {
             viewModel.selectedTab.collectLatest { selectedTab ->
                 setSelectedTabText(selectedTab)
 
             }
         }
-        lifecycleScope.launch{
-            viewModel.event.collectLatest { event->
+        lifecycleScope.launch {
+            viewModel.event.collectLatest { event ->
                 setEvent(event)
             }
         }
@@ -59,45 +58,47 @@ class LoginSignupFragment : Fragment() {
         binding.tabs.addOnTabSelectedListener(
             object : OnTabSelectedListener {
                 override fun onTabSelected(selectedTab: TabLayout.Tab) {
-                    val isLoginTableSelected = binding.tabs.getTabAt(0)?.isSelected?: false
+                    val isLoginTableSelected = binding.tabs.getTabAt(0)?.isSelected ?: false
                     viewModel.onSelectedTab(if (isLoginTableSelected) SelectedTab.LOGIN else SelectedTab.SIGN_UP)
 
 
                 }
 
 
-            override fun onTabUnselected(tab: TabLayout.Tab?) {
+                override fun onTabUnselected(tab: TabLayout.Tab?) {
 
-            }
+                }
 
-            override fun onTabReselected(tab: TabLayout.Tab?) {
+                override fun onTabReselected(tab: TabLayout.Tab?) {
 
-            }
+                }
 
             })
-        binding.actionButton.setOnClickListener{
+        binding.actionButton.setOnClickListener {
             val email = binding.emailField.text.toString()
             val password = binding.passwordField.text.toString()
             viewModel.onActionButtonClicked(email, password)
         }
-        }
+    }
 
-    private fun accessToMainFromLogin(){
+    private fun accessToMainFromLogin() {
         findNavController().navigate(R.id.action_loginSignupFragment_to_mainFragment2)
     }
 
 
-
-
-    private fun setEvent(event: LoginEvent){
-        when(event){
+    private fun setEvent(event: LoginEvent) {
+        when (event) {
             is LoginEvent.LoginSuccessful -> accessToMainFromLogin()
-            is LoginEvent.LoginError -> Toast.makeText(requireContext(), event.errorMessage, Toast.LENGTH_SHORT).show()
+            is LoginEvent.LoginError -> Toast.makeText(
+                requireContext(),
+                event.errorMessage,
+                Toast.LENGTH_SHORT
+            ).show()
         }
     }
 
 
-    private fun setSelectedTabText (selectedTab: SelectedTab){
+    private fun setSelectedTabText(selectedTab: SelectedTab) {
         binding.welcomeBackText.setText(selectedTab.welcomeMessage)
         binding.actionButton.setText(selectedTab.buttonText)
 

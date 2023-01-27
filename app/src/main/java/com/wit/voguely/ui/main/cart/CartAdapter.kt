@@ -12,7 +12,7 @@ import io.paperdb.Paper
 class CartAdapter :RecyclerView.Adapter<CartAdapter.ViewHolder> () {
     var onItemClick: ((Product)-> Unit)? = null
 
-    var dataCart: List<Product> = listOf()
+    var dataCart: List<CartItem> = listOf()
 
     inner class ViewHolder(val binding: RecyclerViewSingleItemCartBinding) :
             RecyclerView.ViewHolder(binding.root) {
@@ -48,14 +48,13 @@ class CartAdapter :RecyclerView.Adapter<CartAdapter.ViewHolder> () {
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.binding.itemNameCart.text = dataCart[position].name
-        holder.binding.itemPriceCart.text = dataCart[position].price.toString()
-       //TODO create a variable for the amount of items selected in the cart=>
-        holder.binding.itemQuantityCart.text = "x1"
+        holder.binding.itemNameCart.text = dataCart[position].product.name
+        holder.binding.itemPriceCart.text = "${dataCart[position].product.currency} ${dataCart[position].product.price.toString()}"
+        holder.binding.itemQuantityCart.text = "x ${dataCart[position].quantity.toString()}"
 
         Glide
             .with(holder.itemView.context)
-            .load(dataCart[position].image)
+            .load(dataCart[position].product.image)
             .into(holder.binding.itemPicCart)
 
     }

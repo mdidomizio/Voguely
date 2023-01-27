@@ -69,6 +69,12 @@ class HomeFragment : Fragment() {
             }
 
         }
+
+       /* lifecycleScope.launch {
+            viewModel.event.collectLatest { event ->
+                setEvent(event)
+            }
+        } */
     }
 
     private fun productClicked(product: Product){

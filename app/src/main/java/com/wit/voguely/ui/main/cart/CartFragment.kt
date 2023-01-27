@@ -20,7 +20,7 @@ import kotlinx.coroutines.flow.collectLatest
 class CartFragment : Fragment() {
 
     val adapter = CartAdapter()
-    val homeAdapter = HomeAdapter()
+
     private var activity : MainFragment? = null
     private lateinit var binding : FragmentCartBinding
     private lateinit var viewModel : CartViewModel
@@ -44,18 +44,7 @@ class CartFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.recyclerviewCart?.adapter = adapter
-        adapter.onItemClick = {
-            val bundle = Bundle()
-            bundle.putString("url", it.image)
-            bundle.putString("Item name", it.name)
-            bundle.putString("Item price", it.price.toString())
 
-            //TODO=> connect the search screen and the home screen to the cart, at the moment, with navigate, I can only have one connection
-            findNavController().navigate(
-              // R.id.action_searchFragment_to_cartFragment,
-                R.id.action_homeFragment_to_cartFragment,
-            bundle)
-        }
 
         lifecycleScope.launchWhenResumed {
             viewModel.itemsInCart.collectLatest {
@@ -66,25 +55,24 @@ class CartFragment : Fragment() {
 
         lifecycleScope.launchWhenResumed {
             viewModel.displayEmptyCart.collectLatest {
-                //TODO remove the hard code here with a function in viewmodel
                 binding.cartIcon.isVisible = it
                 binding.cartEmptyText.isVisible = it
-             /* binding.priceAmount.isInvisible  = it
+                binding.priceAmount.isInvisible  = it
                 binding.buyButtonCart.isInvisible = it
                 binding.priceLabel.isInvisible = it
-                binding.greyArea.isInvisible = it */
-            }
-        }
-
-        lifecycleScope.launchWhenResumed {
-            viewModel.totalPrice.collectLatest {
-                //TODO correct the value to display as total price
-               // binding.priceAmount.text = "EUR ${viewModel.totalPrice}"
-                binding.priceAmount.text = "EUR 300"
+                binding.greyArea.isInvisible = it
             }
         }
 
         /*
+        lifecycleScope.launchWhenResumed {
+            viewModel.priceTotal.collectLatest {
+                //TODO correct the value to display as total price
+               // binding.priceAmount.text = "EUR ${viewModel.totalPrice}"
+                binding.priceAmount.text = "EUR XXX"
+            }
+        }
+
         this part is in the adapter
         lifecycleScope.launchWhenResumed {
             viewModel.quantityOfSelectedItems.collectLatest {

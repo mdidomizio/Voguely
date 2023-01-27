@@ -72,7 +72,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center_vertical"
-        android:text="EUR 900"
+        android:text="EUR XXX"
         android:textColor="#FE3A30"
         android:textStyle="bold"
         android:textSize="15dp"

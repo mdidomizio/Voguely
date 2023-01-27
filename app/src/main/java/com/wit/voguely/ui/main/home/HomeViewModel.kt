@@ -1,15 +1,14 @@
 package com.wit.voguely.ui.main.home
 
+import android.widget.Toast
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.wit.voguely.remote.AddToCartDataSource
 import com.wit.voguely.remote.ProductsDataSource
+import com.wit.voguely.ui.login.LoginEvent
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
 class HomeViewModel : ViewModel() {
@@ -22,6 +21,9 @@ class HomeViewModel : ViewModel() {
 
     private val _displayProgressBar = MutableStateFlow(false)
     val displayProgressBar : StateFlow<Boolean> = _displayProgressBar
+
+    private val _event = MutableSharedFlow<AddToCartEvent>()
+    val event = _event.asSharedFlow()
 
     init {
         loadData(emptyList())
@@ -39,9 +41,15 @@ class HomeViewModel : ViewModel() {
 
     fun addToCart (product: Product){
         viewModelScope.launch (Dispatchers.IO) {
-            _dataProduct.value.let{
-                addToCartDataSource.addItemToCart(product.id)
+            try {
+                _dataProduct.value.let{
+                    addToCartDataSource.addItemToCart(product.id)
+                }
+               // _event.emit(AddToCartEvent.AddToCartSuccessful.)
+            }catch (e: Exception){
+               // _event.emit(AddToCartEvent.AddToCartFailed.)
             }
+
         }
     }
 
