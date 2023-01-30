@@ -1,5 +1,6 @@
 package com.wit.voguely.remote
 
+import android.content.ClipData
 import com.google.android.gms.tasks.Tasks.await
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.FirebaseDatabase
@@ -10,12 +11,14 @@ import com.wit.voguely.model.CartResponse
 import com.wit.voguely.ui.main.home.Product
 import kotlinx.coroutines.tasks.await
 
-class AddToCartDataSource {
 
-    suspend fun addItemToCart(id: String) {
+class AddToCartDataSource (){
 
-        val database = FirebaseDatabase.getInstance("https://voguely-2f691-default-rtdb.europe-west1.firebasedatabase.app")
-        val userId = Firebase.auth.currentUser?.uid ?: return
+suspend fun addItemToCart(id: String) {
+
+    val database = FirebaseDatabase.getInstance("https://voguely-2f691-default-rtdb.europe-west1.firebasedatabase.app")
+
+        val userId = Firebase.auth.currentUser?.uid?: return
 
         val cartInDB  = userId.let { database.getReference("carts").child(userId) }
 
@@ -37,6 +40,12 @@ class AddToCartDataSource {
             cartInDB?.child(itemInCartToCheck.key)
                 ?.setValue(CartResponse(id, itemInCartToCheck.response.quantity + 1))?.await()
         }
+
+
+   /* if(itemInCartToCheck != null){
+        cartInDB?.child(itemInCartToCheck.key)
+       ?.setValue(CartResponse( id, itemInCartToCheck.response.quantity * itemInCartToCheck.response.price ))
+    }*/
         
     }
 }

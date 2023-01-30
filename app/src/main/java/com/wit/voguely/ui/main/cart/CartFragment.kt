@@ -30,6 +30,7 @@ class CartFragment : Fragment() {
         super.onCreate(savedInstanceState)
         activity = activity
         viewModel = ViewModelProvider(this)[CartViewModel::class.java]
+
     }
 
     override fun onCreateView(
@@ -41,12 +42,19 @@ class CartFragment : Fragment() {
 
     }
 
+    override fun onResume() {
+        super.onResume()
+       // viewModel.loadCartItems()
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.recyclerviewCart?.adapter = adapter
+        viewModel.loadCartItems()
 
 
         lifecycleScope.launchWhenResumed {
+
             viewModel.itemsInCart.collectLatest {
                 adapter.dataCart = it
                 adapter.notifyItemInserted(it.size)
@@ -70,13 +78,6 @@ class CartFragment : Fragment() {
                 //TODO correct the value to display as total price
                // binding.priceAmount.text = "EUR ${viewModel.totalPrice}"
                 binding.priceAmount.text = "EUR XXX"
-            }
-        }
-
-        this part is in the adapter
-        lifecycleScope.launchWhenResumed {
-            viewModel.quantityOfSelectedItems.collectLatest {
-                binding.itemQuantity.text = "x ${viewModel.quantityOfSelectedItems}"
             }
         }*/
 

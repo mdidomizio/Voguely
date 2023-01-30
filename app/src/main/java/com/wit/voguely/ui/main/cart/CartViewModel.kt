@@ -17,24 +17,28 @@ class CartViewModel : ViewModel() {
     private var _itemsInCart = MutableStateFlow<List<CartItem>>(emptyList())
     val itemsInCart : StateFlow<List<CartItem>> = _itemsInCart
 
-    private var _displayEmptyCart = MutableStateFlow(false)
+    private var _displayEmptyCart = MutableStateFlow(true)
     val displayEmptyCart : StateFlow<Boolean> = _displayEmptyCart
 
-
-
-
-    val priceTotal  = 0
+    var totalPrice  = 0
 
     init{
         loadCartItems()
     }
     fun loadCartItems(){
+        _displayEmptyCart.value = true
         viewModelScope.launch {
             val cart = getCartDataSource.getItemInCart()
             _itemsInCart.update { cart }
             _displayEmptyCart.value = false
         }
     }
+    fun totalPriceCalculator(){
+        viewModelScope.launch {
+            val cart = getCartDataSource.getItemInCart()
+            totalPrice =
+        }
+
 
     fun buyItemsInCart(){}
 
