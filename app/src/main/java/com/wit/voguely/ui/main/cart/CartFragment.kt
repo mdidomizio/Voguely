@@ -58,8 +58,12 @@ class CartFragment : Fragment() {
             viewModel.itemsInCart.collectLatest {
                 adapter.dataCart = it
                 adapter.notifyItemInserted(it.size)
+
+                binding.priceAmount.text = "${viewModel.getTotalPrice(it)} EUR"
             }
         }
+
+
 
         lifecycleScope.launchWhenResumed {
             viewModel.displayEmptyCart.collectLatest {
@@ -69,6 +73,9 @@ class CartFragment : Fragment() {
                 binding.buyButtonCart.isInvisible = it
                 binding.priceLabel.isInvisible = it
                 binding.greyArea.isInvisible = it
+
+
+
             }
         }
 

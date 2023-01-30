@@ -22,9 +22,7 @@ class CartViewModel : ViewModel() {
 
     var totalPrice  = 0
 
-    init{
-        loadCartItems()
-    }
+
     fun loadCartItems(){
         _displayEmptyCart.value = true
         viewModelScope.launch {
@@ -33,11 +31,13 @@ class CartViewModel : ViewModel() {
             _displayEmptyCart.value = false
         }
     }
-    fun totalPriceCalculator(){
-        viewModelScope.launch {
-            val cart = getCartDataSource.getItemInCart()
-            totalPrice =
-        }
+    fun getTotalPrice(item: List<CartItem>) : Int {
+
+            val totalPrice = item.sumOf{
+                it.product.price * it.quantity }
+        return totalPrice
+    }
+
 
 
     fun buyItemsInCart(){}
