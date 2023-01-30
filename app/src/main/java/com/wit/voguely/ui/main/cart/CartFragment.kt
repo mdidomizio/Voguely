@@ -19,7 +19,7 @@ import kotlinx.coroutines.flow.collectLatest
 
 class CartFragment : Fragment() {
 
-    val adapter = CartAdapter()
+    val adapter = CartAdapter(::onCancelClick)
 
     private var activity : MainFragment? = null
     private lateinit var binding : FragmentCartBinding
@@ -52,18 +52,21 @@ class CartFragment : Fragment() {
         binding.recyclerviewCart?.adapter = adapter
         viewModel.loadCartItems()
 
+        //viewModel.deleteItemFromCart(id.toString())
+
+
 
         lifecycleScope.launchWhenResumed {
 
             viewModel.itemsInCart.collectLatest {
                 adapter.dataCart = it
-                adapter.notifyItemInserted(it.size)
+                adapter.notifyDataSetChanged()
 
                 binding.priceAmount.text = "${viewModel.getTotalPrice(it)} EUR"
+
+
             }
         }
-
-
 
         lifecycleScope.launchWhenResumed {
             viewModel.displayEmptyCart.collectLatest {
@@ -73,24 +76,15 @@ class CartFragment : Fragment() {
                 binding.buyButtonCart.isInvisible = it
                 binding.priceLabel.isInvisible = it
                 binding.greyArea.isInvisible = it
-
-
-
             }
         }
-
-        /*
-        lifecycleScope.launchWhenResumed {
-            viewModel.priceTotal.collectLatest {
-                //TODO correct the value to display as total price
-               // binding.priceAmount.text = "EUR ${viewModel.totalPrice}"
-                binding.priceAmount.text = "EUR XXX"
-            }
-        }*/
 
         binding.buyButtonCart?.setOnClickListener {
             viewModel.buyItemsInCart()
         }
+    }
+    fun onCancelClick(item: CartItem){
+        viewModel.deleteItemFromCart(item.product.id)
     }
 
 

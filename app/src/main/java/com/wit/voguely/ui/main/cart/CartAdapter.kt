@@ -10,15 +10,17 @@ import com.wit.voguely.ui.main.home.Product
 
 
 
-class CartAdapter :RecyclerView.Adapter<CartAdapter.ViewHolder> () {
-    var onItemClick: ((Product)-> Unit)? = null
+class CartAdapter ( var onCancelClick: ((CartItem)-> Unit)) :RecyclerView.Adapter<CartAdapter.ViewHolder> () {
+
 
     var dataCart: List<CartItem> = listOf()
 
     inner class ViewHolder(val binding: RecyclerViewSingleItemCartBinding) :
             RecyclerView.ViewHolder(binding.root) {
                 init {
-                    //addItemToCart()
+                    binding.cancelIcon.setOnClickListener{
+                        onCancelClick?.invoke(dataCart[adapterPosition])
+                    }
 
                     }
 

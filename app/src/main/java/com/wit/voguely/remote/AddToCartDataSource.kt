@@ -40,12 +40,6 @@ suspend fun addItemToCart(id: String) {
             cartInDB?.child(itemInCartToCheck.key)
                 ?.setValue(CartResponse(id, itemInCartToCheck.response.quantity + 1))?.await()
         }
-
-
-   /* if(itemInCartToCheck != null){
-        cartInDB?.child(itemInCartToCheck.key)
-       ?.setValue(CartResponse( id, itemInCartToCheck.response.quantity * itemInCartToCheck.response.price ))
-    }*/
         
     }
 }
