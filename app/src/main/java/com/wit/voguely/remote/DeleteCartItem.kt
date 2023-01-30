@@ -23,7 +23,7 @@ class DeleteCartItem {
 
         val itemInCartToRemove : Cart? = carts.firstOrNull { it.response.productId == id }
 
-        itemInCartToRemove?.key?.let { cartInDB.child(it).removeValue() }
+        itemInCartToRemove?.key?.let { cartInDB.child(it).removeValue().await() }
 
 
     }

@@ -21,7 +21,6 @@ class CartAdapter ( var onCancelClick: ((CartItem)-> Unit)) :RecyclerView.Adapte
                     binding.cancelIcon.setOnClickListener{
                         onCancelClick?.invoke(dataCart[adapterPosition])
                     }
-
                     }
 
 

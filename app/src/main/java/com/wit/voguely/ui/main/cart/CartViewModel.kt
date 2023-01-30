@@ -1,22 +1,22 @@
 package com.wit.voguely.ui.main.cart
 
-import android.widget.Toast
+import android.security.identity.AccessControlProfileId
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.wit.voguely.remote.DeleteAllCartAfterBuying
 import com.wit.voguely.remote.DeleteCartItem
 import com.wit.voguely.remote.GetCartDataSource
-import com.wit.voguely.ui.main.home.Product
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import okhttp3.Dispatcher
 
 class CartViewModel : ViewModel() {
 
     private val getCartDataSource = GetCartDataSource()
     private val deleteCartItem = DeleteCartItem()
+    private val deleteAllCartAfterBuying = DeleteAllCartAfterBuying()
 
     private var _itemsInCart = MutableStateFlow<List<CartItem>>(emptyList())
     val itemsInCart : StateFlow<List<CartItem>> = _itemsInCart
@@ -48,7 +48,14 @@ class CartViewModel : ViewModel() {
 
 
 
-    fun buyItemsInCart(){}
+    fun buyItemsInCart() {
+        viewModelScope.launch (Dispatchers.IO){
+            deleteAllCartAfterBuying.deleteItemFromCart()
+            _itemsInCart.value = emptyList()
+
+        }
+
+    }
 
 
 

@@ -9,11 +9,8 @@ import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.fragment.findNavController
-import com.wit.voguely.R
 import com.wit.voguely.databinding.FragmentCartBinding
 import com.wit.voguely.ui.main.MainFragment
-import com.wit.voguely.ui.main.home.HomeAdapter
 import kotlinx.coroutines.flow.collectLatest
 
 
@@ -52,10 +49,6 @@ class CartFragment : Fragment() {
         binding.recyclerviewCart?.adapter = adapter
         viewModel.loadCartItems()
 
-        //viewModel.deleteItemFromCart(id.toString())
-
-
-
         lifecycleScope.launchWhenResumed {
 
             viewModel.itemsInCart.collectLatest {
@@ -70,6 +63,7 @@ class CartFragment : Fragment() {
 
         lifecycleScope.launchWhenResumed {
             viewModel.displayEmptyCart.collectLatest {
+
                 binding.cartIcon.isVisible = it
                 binding.cartEmptyText.isVisible = it
                 binding.priceAmount.isInvisible  = it
@@ -83,9 +77,7 @@ class CartFragment : Fragment() {
             viewModel.buyItemsInCart()
         }
     }
-    fun onCancelClick(item: CartItem){
+    private fun onCancelClick(item: CartItem){
         viewModel.deleteItemFromCart(item.product.id)
     }
-
-
 }
