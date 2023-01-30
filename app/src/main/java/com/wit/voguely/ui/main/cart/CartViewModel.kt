@@ -1,6 +1,7 @@
 package com.wit.voguely.ui.main.cart
 
 import android.security.identity.AccessControlProfileId
+import android.widget.Toast
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.wit.voguely.remote.DeleteAllCartAfterBuying
@@ -43,6 +44,7 @@ class CartViewModel : ViewModel() {
         viewModelScope.launch(Dispatchers.IO){
           deleteCartItem.deleteItemFromCart(id)
             loadCartItems()
+
         }
     }
 
@@ -51,7 +53,7 @@ class CartViewModel : ViewModel() {
     fun buyItemsInCart() {
         viewModelScope.launch (Dispatchers.IO){
             deleteAllCartAfterBuying.deleteItemFromCart()
-            _itemsInCart.value = emptyList()
+                _itemsInCart.value = emptyList()
 
         }
 

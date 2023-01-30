@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.PopupMenu
+import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
@@ -94,6 +95,7 @@ class HomeFragment : Fragment() {
         popUpMenu.setOnMenuItemClickListener {
             if(it.itemId == R.id.add_to_cart_popup){
                 viewModel.addToCart(product)
+                Toast.makeText( this@HomeFragment.requireActivity(), "Your product has been successfully added to the cart", Toast.LENGTH_SHORT).show()
             }
             return@setOnMenuItemClickListener true
         }

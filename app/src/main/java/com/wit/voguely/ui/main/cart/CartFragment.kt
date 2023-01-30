@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
@@ -48,6 +49,10 @@ class CartFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding.recyclerviewCart?.adapter = adapter
         viewModel.loadCartItems()
+        //TODO => sposta nel punto giusto:
+        // Toast.makeText( this@CartFragment.requireActivity(), "Your product has been successfully added to the cart", Toast.LENGTH_SHORT).show()
+
+
 
         lifecycleScope.launchWhenResumed {
 
@@ -62,7 +67,7 @@ class CartFragment : Fragment() {
         }
 
         lifecycleScope.launchWhenResumed {
-            viewModel.displayEmptyCart.collectLatest {
+           viewModel.displayEmptyCart.collectLatest {
 
                 binding.cartIcon.isVisible = it
                 binding.cartEmptyText.isVisible = it
@@ -75,6 +80,7 @@ class CartFragment : Fragment() {
 
         binding.buyButtonCart?.setOnClickListener {
             viewModel.buyItemsInCart()
+            Toast.makeText( this@CartFragment.requireActivity(), "Your order is successful, you will receive it soon ", Toast.LENGTH_SHORT).show()
         }
     }
     private fun onCancelClick(item: CartItem){
