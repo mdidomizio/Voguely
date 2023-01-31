@@ -26,11 +26,12 @@ class CartViewModel : ViewModel() {
     private var _displayEmptyCart = MutableStateFlow(true)
     val displayEmptyCart : StateFlow<Boolean> = _displayEmptyCart
 
-    private var _displayOrderSuccessful = MutableStateFlow(false)
+   /* private var _displayOrderSuccessful = MutableStateFlow(false)
     val displayOrderSuccessful : StateFlow<Boolean> = _displayOrderSuccessful
 
     private var _displayFullCart = MutableStateFlow(false)
     val displayFullCart : StateFlow<Boolean> = _displayFullCart
+    */
 
 
 
@@ -81,8 +82,6 @@ class CartViewModel : ViewModel() {
         viewModelScope.launch (Dispatchers.IO){
             deleteAllCartAfterBuying.deleteItemFromCart()
             _displayEmptyCart.value = true
-
-
         }
 
     }
