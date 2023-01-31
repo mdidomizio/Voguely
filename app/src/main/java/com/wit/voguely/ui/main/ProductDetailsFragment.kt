@@ -10,7 +10,9 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
 import com.wit.voguely.databinding.FragmentProductDetailsBinding
+import com.wit.voguely.ui.main.home.AddToCartEvent
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
 class ProductDetailsFragment : Fragment() {
 
@@ -38,6 +40,11 @@ class ProductDetailsFragment : Fragment() {
 
         getArguments()?.getString("id")?.let { viewModel.loadDetails(it) }
 
+        lifecycleScope.launch {
+            viewModel.event.collectLatest { event ->
+                setEvent(event)
+            }
+        }
 
         lifecycleScope.launchWhenResumed {
             viewModel.dataProduct.collectLatest {product->
@@ -60,11 +67,26 @@ class ProductDetailsFragment : Fragment() {
 
         binding.addToCartButton.setOnClickListener{
             viewModel.addToCart()
-            Toast.makeText( this@ProductDetailsFragment.requireActivity(), "Your product has been successfully added to the cart", Toast.LENGTH_SHORT).show()
+            //Toast.makeText( this@ProductDetailsFragment.requireActivity(), "Your product has been successfully added to the cart", Toast.LENGTH_SHORT).show()
         }
 
     }
 
+    private fun setEvent(event: AddToCartEvent) {
+        when (event) {
+            is AddToCartEvent.AddToCartFailed -> Toast.makeText(
+                requireContext(),
+                event.localizedMessage,
+                Toast.LENGTH_SHORT
+            ).show()
+
+            is AddToCartEvent.AddToCartSuccessful -> Toast.makeText(
+                requireContext(),
+                event.cartMessage,
+                Toast.LENGTH_SHORT
+            ).show()
+        }
+    }
 
 }
 

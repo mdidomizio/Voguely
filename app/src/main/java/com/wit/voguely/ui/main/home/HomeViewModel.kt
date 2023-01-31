@@ -1,13 +1,10 @@
 package com.wit.voguely.ui.main.home
 
-import android.widget.Toast
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.wit.voguely.remote.AddToCartDataSource
 import com.wit.voguely.remote.ProductsDataSource
-import com.wit.voguely.ui.login.LoginEvent
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
@@ -45,9 +42,9 @@ class HomeViewModel : ViewModel() {
                 _dataProduct.value.let{
                     addToCartDataSource.addItemToCart(product.id)
                 }
-               // _event.emit(AddToCartEvent.AddToCartSuccessful.)
+                _event.emit(AddToCartEvent.AddToCartSuccessful("Item added to cart"))
             }catch (e: Exception){
-               // _event.emit(AddToCartEvent.AddToCartFailed.)
+               _event.emit(AddToCartEvent.AddToCartFailed(e.localizedMessage))
             }
 
         }

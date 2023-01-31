@@ -1,15 +1,10 @@
 package com.wit.voguely.ui.login
 
-import android.content.Intent
-import android.widget.Toast
-import androidx.core.content.ContextCompat.startActivity
+
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.ktx.auth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
-import com.wit.voguely.ui.MainActivity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch

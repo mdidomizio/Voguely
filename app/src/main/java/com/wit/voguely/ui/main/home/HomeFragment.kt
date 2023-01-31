@@ -16,6 +16,7 @@ import androidx.navigation.fragment.findNavController
 import com.wit.voguely.R
 import com.wit.voguely.databinding.FragmentCartBinding
 import com.wit.voguely.databinding.FragmentHomeBinding
+import com.wit.voguely.ui.login.LoginEvent
 import com.wit.voguely.ui.main.MainFragment
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.NonDisposableHandle.parent
@@ -56,6 +57,12 @@ class HomeFragment : Fragment() {
 
         adapter.onSeeMoreClicked = :: onSeeMoreClicked
 
+        lifecycleScope.launch {
+            viewModel.event.collectLatest { event ->
+                setEvent(event)
+            }
+        }
+
         lifecycleScope.launchWhenResumed {
             viewModel.dataProduct.collectLatest {
                 adapter.data = it
@@ -71,11 +78,6 @@ class HomeFragment : Fragment() {
 
         }
 
-       /* lifecycleScope.launch {
-            viewModel.event.collectLatest { event ->
-                setEvent(event)
-            }
-        } */
     }
 
     private fun productClicked(product: Product){
@@ -95,9 +97,25 @@ class HomeFragment : Fragment() {
         popUpMenu.setOnMenuItemClickListener {
             if(it.itemId == R.id.add_to_cart_popup){
                 viewModel.addToCart(product)
-                Toast.makeText( this@HomeFragment.requireActivity(), "Your product has been successfully added to the cart", Toast.LENGTH_SHORT).show()
+                //Toast.makeText( this@HomeFragment.requireActivity(), "Your product has been successfully added to the cart", Toast.LENGTH_SHORT).show()
             }
             return@setOnMenuItemClickListener true
+        }
+    }
+
+    private fun setEvent(event: AddToCartEvent) {
+        when (event) {
+            is AddToCartEvent.AddToCartFailed -> Toast.makeText(
+                requireContext(),
+                event.localizedMessage,
+                Toast.LENGTH_SHORT
+            ).show()
+
+            is AddToCartEvent.AddToCartSuccessful -> Toast.makeText(
+                requireContext(),
+                event.cartMessage,
+                Toast.LENGTH_SHORT
+            ).show()
         }
     }
 
