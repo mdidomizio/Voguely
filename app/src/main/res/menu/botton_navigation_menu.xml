@@ -12,7 +12,7 @@
 
     <item
         android:id="@+id/cartFragment"
-        android:icon="@drawable/ic_baseline_shopping_cart_24"
+        android:icon="@drawable/ic_cart"
         android:title="@string/cartMenuBottNavBar"/>
 
 </menu>

@@ -75,8 +75,35 @@ class CartFragment : Fragment() {
                 binding.buyButtonCart.isInvisible = it
                 binding.priceLabel.isInvisible = it
                 binding.greyArea.isInvisible = it
+                //binding.checkMarkOrder.isInvisible = it
             }
         }
+/*
+        lifecycleScope.launchWhenResumed {
+            viewModel.displayFullCart.collectLatest {
+
+                binding.cartIcon.isInvisible = it
+                binding.cartEmptyText.isInvisible = it
+                binding.priceAmount.isVisible  = it
+                binding.buyButtonCart.isVisible = it
+                binding.priceLabel.isVisible = it
+                binding.greyArea.isVisible = it
+                binding.checkMarkOrder.isInvisible = it
+            }
+        }
+
+       lifecycleScope.launchWhenResumed {
+            viewModel.displayOrderSuccessful.collectLatest {
+
+                binding.cartIcon.isInvisible = it
+                binding.cartEmptyText.isInvisible = it
+                binding.priceAmount.isInvisible  = it
+                binding.buyButtonCart.isInvisible = it
+                binding.priceLabel.isInvisible = it
+                binding.greyArea.isInvisible = it
+                binding.checkMarkOrder.isVisible = it
+            }
+        }*/
 
         binding.buyButtonCart?.setOnClickListener {
             viewModel.buyItemsInCart()
