@@ -22,8 +22,6 @@ class LoginViewModel : ViewModel() {
     private val _event = MutableSharedFlow<LoginEvent>()
     val event = _event.asSharedFlow()
 
-
-
     fun onSelectedTab(selectedTab: SelectedTab){
         viewModelScope.launch {
             _selectedTab.update { selectedTab }
@@ -39,8 +37,6 @@ class LoginViewModel : ViewModel() {
             }
         }
     }
-
-
 
     private fun login(email: String, password: String) =
         viewModelScope.launch (Dispatchers.IO) {

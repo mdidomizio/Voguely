@@ -60,8 +60,6 @@ class LoginSignupFragment : Fragment() {
                 override fun onTabSelected(selectedTab: TabLayout.Tab) {
                     val isLoginTableSelected = binding.tabs.getTabAt(0)?.isSelected ?: false
                     viewModel.onSelectedTab(if (isLoginTableSelected) SelectedTab.LOGIN else SelectedTab.SIGN_UP)
-
-
                 }
 
 

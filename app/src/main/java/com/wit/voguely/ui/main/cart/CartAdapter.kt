@@ -22,8 +22,6 @@ class CartAdapter ( var onCancelClick: ((CartItem)-> Unit)) :RecyclerView.Adapte
                         onCancelClick?.invoke(dataCart[adapterPosition])
                     }
                     }
-
-
                 }
 
 
