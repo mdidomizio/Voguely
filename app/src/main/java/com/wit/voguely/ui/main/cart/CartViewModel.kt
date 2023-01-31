@@ -12,6 +12,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import java.security.KeyStore.TrustedCertificateEntry
 
 class CartViewModel : ViewModel() {
 
@@ -27,13 +28,20 @@ class CartViewModel : ViewModel() {
 
 
     fun loadCartItems(){
-        _displayEmptyCart.value = true
+
         viewModelScope.launch {
+            _displayEmptyCart.value = true
             val cart = getCartDataSource.getItemInCart()
-            _itemsInCart.update { cart }
-            _displayEmptyCart.value = false
+            if(cart.isEmpty()){
+                _itemsInCart.value = emptyList()
+                return@launch
+            }else{
+                _itemsInCart.update { cart }
+                _displayEmptyCart.value = false
+            }
         }
     }
+
     fun getTotalPrice(item: List<CartItem>) : Int {
             val totalPrice = item.sumOf{
                 it.product.price * it.quantity }
@@ -42,6 +50,7 @@ class CartViewModel : ViewModel() {
 
     fun deleteItemFromCart(id: String){
         viewModelScope.launch(Dispatchers.IO){
+            _displayEmptyCart.value = false
           deleteCartItem.deleteItemFromCart(id)
             loadCartItems()
 
@@ -54,6 +63,8 @@ class CartViewModel : ViewModel() {
         viewModelScope.launch (Dispatchers.IO){
             deleteAllCartAfterBuying.deleteItemFromCart()
                 _itemsInCart.value = emptyList()
+            _displayEmptyCart.value = true
+
 
         }
 
