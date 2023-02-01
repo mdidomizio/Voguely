@@ -12,7 +12,9 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.wit.voguely.databinding.FragmentCartBinding
 import com.wit.voguely.ui.main.MainFragment
+import com.wit.voguely.ui.main.home.AddToCartEvent
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
 
 class CartFragment : Fragment() {
@@ -42,17 +44,20 @@ class CartFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-       // viewModel.loadCartItems()
+       viewModel.loadCartItems()
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.recyclerviewCart?.adapter = adapter
         viewModel.loadCartItems()
-        //TODO => sposta nel punto giusto:
-        // Toast.makeText( this@CartFragment.requireActivity(), "Your product has been successfully added to the cart", Toast.LENGTH_SHORT).show()
 
-
+        lifecycleScope.launch {
+            viewModel.event.collectLatest { event ->
+                setEvent(event)
+            }
+        }
 
         lifecycleScope.launchWhenResumed {
 
@@ -107,10 +112,27 @@ class CartFragment : Fragment() {
 
         binding.buyButtonCart?.setOnClickListener {
             viewModel.buyItemsInCart()
-            Toast.makeText( this@CartFragment.requireActivity(), "Your order is successful, you will receive it soon ", Toast.LENGTH_SHORT).show()
+            //Toast.makeText( this@CartFragment.requireActivity(), "Your order is successful, you will receive it soon ", Toast.LENGTH_SHORT).show()
         }
     }
     private fun onCancelClick(item: CartItem){
         viewModel.deleteItemFromCart(item.product.id)
     }
+
+    private fun setEvent(event: OrderEvent) {
+        when (event) {
+            is OrderEvent.OrderFailed -> Toast.makeText(
+                requireContext(),
+                event.localizedMessage,
+                Toast.LENGTH_SHORT
+            ).show()
+
+            is OrderEvent.OrderConfirmed -> Toast.makeText(
+                requireContext(),
+                event.orderMessage,
+                Toast.LENGTH_SHORT
+            ).show()
+        }
+    }
+
 }

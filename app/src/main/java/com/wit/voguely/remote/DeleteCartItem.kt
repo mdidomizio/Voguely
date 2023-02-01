@@ -28,7 +28,7 @@ class DeleteCartItem {
         //COMMENT is cancelling directly the whole amount of the same item =>
         // itemInCartToRemove?.key?.let { cartInDB.child(it).removeValue().await() }
 
-//COMMENT is decreasing the quantity of item in the cart and cancells the items when their quantity is 1
+//COMMENT is decreasing the quantity of item in the cart and cancels the items when their quantity is 1
       if (itemInCartToRemove != null) {
             cartInDB?.child(itemInCartToRemove.key)
             ?.setValue(CartResponse(id, itemInCartToRemove.response.quantity - 1))?.await()

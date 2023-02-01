@@ -7,10 +7,9 @@ import androidx.lifecycle.viewModelScope
 import com.wit.voguely.remote.DeleteAllCartAfterBuying
 import com.wit.voguely.remote.DeleteCartItem
 import com.wit.voguely.remote.GetCartDataSource
+import com.wit.voguely.ui.main.home.AddToCartEvent
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import java.security.KeyStore.TrustedCertificateEntry
 
@@ -26,12 +25,15 @@ class CartViewModel : ViewModel() {
     private var _displayEmptyCart = MutableStateFlow(true)
     val displayEmptyCart : StateFlow<Boolean> = _displayEmptyCart
 
-   /* private var _displayOrderSuccessful = MutableStateFlow(false)
-    val displayOrderSuccessful : StateFlow<Boolean> = _displayOrderSuccessful
+    private val _event = MutableSharedFlow<OrderEvent>()
+    val event = _event.asSharedFlow()
 
-    private var _displayFullCart = MutableStateFlow(false)
-    val displayFullCart : StateFlow<Boolean> = _displayFullCart
-    */
+    /* private var _displayOrderSuccessful = MutableStateFlow(false)
+     val displayOrderSuccessful : StateFlow<Boolean> = _displayOrderSuccessful
+
+     private var _displayFullCart = MutableStateFlow(false)
+     val displayFullCart : StateFlow<Boolean> = _displayFullCart
+     */
 
 
 
@@ -80,8 +82,17 @@ class CartViewModel : ViewModel() {
 
     fun buyItemsInCart() {
         viewModelScope.launch (Dispatchers.IO){
-            deleteAllCartAfterBuying.deleteItemFromCart()
-            _displayEmptyCart.value = true
+            try{
+                //_displayEmptyCart.value = false
+                deleteAllCartAfterBuying.deleteItemFromCart()
+                _displayEmptyCart.value = true
+                // _displayOrderSuccessful.value = true
+
+                _event.emit(OrderEvent.OrderConfirmed("Your order is confirmed"))
+            }catch (e: Exception){
+                _event.emit(OrderEvent.OrderFailed(e.localizedMessage))
+            }
+
         }
 
     }
