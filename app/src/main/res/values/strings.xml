@@ -1,10 +1,9 @@
 <resources>
     <string name="app_name">Voguely</string>
 
-    <string name="HeyText">Hey!</string>
-    <string name="SubtitleTextLogin">Welcome Back</string>
-    <string name="SubtitleTextSignUp">Join Now</string>
-    <string name="LoginTab">Login</string>
+    <string name="hey_text">Hey!</string>
+    <string name="subtitle_text_login">Welcome Back</string>
+    <string name="subtitle_text_sign_up">Join Now</string>
     <string name="SignUpTab">Sign Up</string>
     <string name="emailField">Email</string>
     <string name="passwordField">Password</string>
@@ -12,7 +11,6 @@
     <string name="signUpButton">Sign Up</string>
     <string name="termsConditionText">Terms and Conditions Apply*</string>
     <string name="login_tab">Login</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="item_name">name item in almost black</string>
     <string name="item_price">some orange price in €</string>
@@ -22,4 +20,5 @@
     <string name="homeMenuBottNavBar">Home</string>
     <string name="searchMenuBottNavBar">Search</string>
     <string name="cartMenuBottNavBar">Cart</string>
+    <string name="add_to_cart">Add to cart</string>
 </resources>

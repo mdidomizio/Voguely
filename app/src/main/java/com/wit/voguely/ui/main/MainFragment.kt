@@ -17,7 +17,6 @@ import com.wit.voguely.ui.MainViewModel
 
 class MainFragment : Fragment() {
 
-
     lateinit var binding : FragmentMainBinding
     lateinit var viewModel : MainViewModel
 
@@ -26,7 +25,6 @@ class MainFragment : Fragment() {
         viewModel = ViewModelProvider(this)[MainViewModel:: class.java]
     }
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -34,8 +32,6 @@ class MainFragment : Fragment() {
         // Inflate the layout for this fragment
         binding = FragmentMainBinding.inflate(inflater, container, false)
         return binding.root
-
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -49,7 +45,6 @@ class MainFragment : Fragment() {
         binding.toolbar.setupWithNavController(navController, appBarConfiguration)
 
         signOutToolbar()
-
     }
 
     private fun signOutToolbar(){
@@ -59,7 +54,6 @@ class MainFragment : Fragment() {
             findNavController().navigate(R.id.action_mainFragment2_to_loginSignupFragment2)
             return@setOnMenuItemClickListener false
         }
-
     }
 
 }

@@ -21,7 +21,6 @@ class LoginViewModel : ViewModel() {
         viewModelScope.launch {
             _selectedTab.update { selectedTab }
         }
-
     }
 
     fun onActionButtonClicked(email: String, password: String) {

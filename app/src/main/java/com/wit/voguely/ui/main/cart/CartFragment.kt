@@ -19,18 +19,14 @@ import kotlinx.coroutines.launch
 
 class CartFragment : Fragment() {
 
-    val adapter = CartAdapter(::onCancelClick)
+    private val adapter = CartAdapter(::onCancelClick)
 
-    private var activity : MainFragment? = null
     private lateinit var binding : FragmentCartBinding
     private lateinit var viewModel : CartViewModel
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        activity = activity
         viewModel = ViewModelProvider(this)[CartViewModel::class.java]
-
     }
 
     override fun onCreateView(
@@ -39,7 +35,6 @@ class CartFragment : Fragment() {
     ): View? {
         binding = FragmentCartBinding.inflate(inflater,container, false)
         return binding.root
-
     }
 
     override fun onResume() {
@@ -60,27 +55,21 @@ class CartFragment : Fragment() {
         }
 
         lifecycleScope.launchWhenResumed {
-
             viewModel.itemsInCart.collectLatest {
                 adapter.dataCart = it
                 adapter.notifyDataSetChanged()
-
                 binding.priceAmount.text = "${viewModel.getTotalPrice(it)} EUR"
-
-
             }
         }
 
         lifecycleScope.launchWhenResumed {
            viewModel.displayEmptyCart.collectLatest {
-
                 binding.cartIcon.isVisible = it
                 binding.cartEmptyText.isVisible = it
                 binding.priceAmount.isInvisible  = it
                 binding.buyButtonCart.isInvisible = it
                 binding.priceLabel.isInvisible = it
                 binding.greyArea.isInvisible = it
-                //binding.checkMarkOrder.isInvisible = it
             }
         }
 /*

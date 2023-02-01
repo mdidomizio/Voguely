@@ -28,19 +28,16 @@ class ProductDetailsViewModel : ViewModel() {
         viewModelScope.launch(Dispatchers.IO) {
             _dataProduct.update { productDataSource.getProduct(id) }
         }
-
     }
 
     fun addToCart() {
         viewModelScope.launch(Dispatchers.IO) {
             try {
-                _dataProduct.value.let {
-                    if (it != null) {
-                        addToCartDataSource.addItemToCart(it.id)
-                    }
+                val product = _dataProduct.value
+                if (product != null){
+                    addToCartDataSource.addItemToCart(product.id)
+                    _event.emit(AddToCartEvent.AddToCartSuccessful("Item added to cart"))
                 }
-                _event.emit(AddToCartEvent.AddToCartSuccessful("Item added to cart"))
-
             } catch (e: Exception) {
                 _event.emit(AddToCartEvent.AddToCartFailed(e.localizedMessage))
             }

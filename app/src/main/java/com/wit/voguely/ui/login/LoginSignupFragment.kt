@@ -23,11 +23,9 @@ class LoginSignupFragment : Fragment() {
     private lateinit var binding: FragmentLoginSignupBinding
     private lateinit var viewModel: LoginViewModel
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewModel = ViewModelProvider(this)[LoginViewModel::class.java]
-
     }
 
     override fun onCreateView(
@@ -45,7 +43,6 @@ class LoginSignupFragment : Fragment() {
         lifecycleScope.launch {
             viewModel.selectedTab.collectLatest { selectedTab ->
                 setSelectedTabText(selectedTab)
-
             }
         }
         lifecycleScope.launch {
@@ -83,7 +80,6 @@ class LoginSignupFragment : Fragment() {
         findNavController().navigate(R.id.action_loginSignupFragment_to_mainFragment2)
     }
 
-
     private fun setEvent(event: LoginEvent) {
         when (event) {
             is LoginEvent.LoginSuccessful -> accessToMainFromLogin()
@@ -95,19 +91,9 @@ class LoginSignupFragment : Fragment() {
         }
     }
 
-
     private fun setSelectedTabText(selectedTab: SelectedTab) {
         binding.welcomeBackText.setText(selectedTab.welcomeMessage)
         binding.actionButton.setText(selectedTab.buttonText)
-
     }
 
 }
-
-/* if (selectedTab == SelectedTab.LOGIN) {
-                binding.welcomeBackText.text = getString(R.string.SubtitleTextLogin)
-                binding.actionButton.text = getString(R.string.loginButton)
-            } else {
-                binding.welcomeBackText.text = getString(R.string.SubtitleTextSignUp)
-                binding.actionButton.text = getString(R.string.signUpButton)
-            } */

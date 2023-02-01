@@ -16,10 +16,12 @@ import kotlinx.coroutines.launch
 
 class ProductDetailsFragment : Fragment() {
 
-
+    companion object {
+        const val PRODUCT_ID_ARG = "id"
+    }
 
     private lateinit var binding: FragmentProductDetailsBinding
-    private lateinit var viewModel : ProductDetailsViewModel
+    private lateinit var viewModel: ProductDetailsViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,14 +33,14 @@ class ProductDetailsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        binding = FragmentProductDetailsBinding.inflate(inflater,container, false)
+        binding = FragmentProductDetailsBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        getArguments()?.getString("id")?.let { viewModel.loadDetails(it) }
+        arguments?.getString(PRODUCT_ID_ARG)?.let { viewModel.loadDetails(it) }
 
         lifecycleScope.launch {
             viewModel.event.collectLatest { event ->
@@ -47,31 +49,27 @@ class ProductDetailsFragment : Fragment() {
         }
 
         lifecycleScope.launchWhenResumed {
-            viewModel.dataProduct.collectLatest {product->
+            viewModel.dataProduct.collectLatest { product ->
+                if (product == null) return@collectLatest
 
-                if (product != null){
+                binding.nameItemProductDetails.text = product.name
+                binding.priceProductDetails.text = "${product.currency} ${product.price}"
+                binding.descriptionProductDetails.text = product.description
+                binding.rateProductDetails.text = product.rating.toString()
 
-                    binding.nameItemProductDetails.text = product.name
-                    binding.priceProductDetails.text = "${product.currency} ${product.price.toString()}"
-                    binding.descriptionProductDetails.text = product.description
-                    binding.rateProductDetails.text = product.rating.toString()
-
-                    Glide.with(requireContext())
-                        .load(product.image)
-                        .into(binding.picDetailsProduct)
-
-                }
-
+                Glide.with(requireContext())
+                    .load(product.image)
+                    .into(binding.picDetailsProduct)
             }
         }
 
-        binding.addToCartButton.setOnClickListener{
+        binding.addToCartButton.setOnClickListener {
             viewModel.addToCart()
-            //Toast.makeText( this@ProductDetailsFragment.requireActivity(), "Your product has been successfully added to the cart", Toast.LENGTH_SHORT).show()
         }
 
     }
 
+    // TODO
     private fun setEvent(event: AddToCartEvent) {
         when (event) {
             is AddToCartEvent.AddToCartFailed -> Toast.makeText(
@@ -79,7 +77,6 @@ class ProductDetailsFragment : Fragment() {
                 event.localizedMessage,
                 Toast.LENGTH_SHORT
             ).show()
-
             is AddToCartEvent.AddToCartSuccessful -> Toast.makeText(
                 requireContext(),
                 event.cartMessage,

@@ -23,32 +23,26 @@ class HomeViewModel : ViewModel() {
     val event = _event.asSharedFlow()
 
     init {
-        loadData(emptyList())
+        loadData()
     }
 
-    fun loadData(mockData: List<Product>){
+    private fun loadData() {
         _displayProgressBar.value = true
-
         viewModelScope.launch{
             _dataProduct.update{ productsDataSource.getProducts() }
             _displayProgressBar.value = false
         }
-
     }
 
     fun addToCart (product: Product){
         viewModelScope.launch (Dispatchers.IO) {
             try {
-                _dataProduct.value.let{
-                    addToCartDataSource.addItemToCart(product.id)
-                }
+                addToCartDataSource.addItemToCart(product.id)
                 _event.emit(AddToCartEvent.AddToCartSuccessful("Item added to cart"))
             }catch (e: Exception){
                _event.emit(AddToCartEvent.AddToCartFailed(e.localizedMessage))
             }
-
         }
     }
-
 
 }

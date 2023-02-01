@@ -15,19 +15,20 @@ import androidx.navigation.fragment.findNavController
 import com.wit.voguely.R
 import com.wit.voguely.databinding.FragmentSearchBinding
 import com.wit.voguely.ui.main.MainFragment
+import com.wit.voguely.ui.main.ProductDetailsFragment
+import com.wit.voguely.ui.main.ProductDetailsFragment.Companion.PRODUCT_ID_ARG
 import com.wit.voguely.ui.main.home.HomeAdapter
 import com.wit.voguely.ui.main.home.Product
 import kotlinx.coroutines.flow.collectLatest
 
 class SearchFragment : Fragment() {
-    private var activity: MainFragment? = null
+
     private lateinit var binding: FragmentSearchBinding
     private lateinit var viewModel: SearchViewModel
-    val adapter = HomeAdapter()
+    private val adapter = HomeAdapter()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        activity = activity
         viewModel = ViewModelProvider(this)[SearchViewModel::class.java]
     }
 
@@ -42,27 +43,15 @@ class SearchFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        binding.recyclerviewSearch?.adapter = adapter
+        binding.recyclerviewSearch.adapter = adapter
 
         adapter.onItemClick = { productClicked(it) }
-
-        adapter.onSeeMoreClicked = :: onSeeMoreClicked
-
-        /*adapter.onItemClick = {
-            val bundle = Bundle()
-            bundle.putString("url", it.image)
-            bundle.putString("itemName", it.name)
-            bundle.putString("itemPrice", it.price.toString())
-            findNavController().navigate(R.id.action_searchFragment_to_cartFragment)
-        }*/
+        adapter.onSeeMoreClicked = ::onSeeMoreClicked
 
         lifecycleScope.launchWhenResumed {
             viewModel.itemSearched.collectLatest {
-
                 adapter.data = it
                 adapter.notifyDataSetChanged()
-
             }
         }
 
@@ -81,7 +70,7 @@ class SearchFragment : Fragment() {
                 count: Int,
                 after: Int
             ) {
-                viewModel.searchItem(s ?: "")
+                viewModel.searchItem(s)
             }
 
             override fun afterTextChanged(s: Editable?) {}
@@ -96,27 +85,25 @@ class SearchFragment : Fragment() {
         }
     }
 
-    private fun productClicked(product: Product){
+    private fun productClicked(product: Product) {
         val bundle = Bundle()
-        bundle.putString("id", product.id )
+        bundle.putString(PRODUCT_ID_ARG, product.id)
         parentFragment
             ?.parentFragment
             ?.findNavController()
             ?.navigate(R.id.action_mainFragment2_to_productDetailsFragment, bundle)
     }
 
-    private fun onSeeMoreClicked (product: Product, view: View){
+    private fun onSeeMoreClicked(product: Product, view: View) {
         val popUpMenu = PopupMenu(requireContext(), view)
         val inflater = popUpMenu.menuInflater
         inflater.inflate(R.menu.pop_up_menu, popUpMenu.menu)
         popUpMenu.show()
         popUpMenu.setOnMenuItemClickListener {
-            if(it.itemId == R.id.add_to_cart_popup){
+            if (it.itemId == R.id.add_to_cart_popup) {
                 viewModel.addToCart(product)
             }
             return@setOnMenuItemClickListener true
         }
-
-
     }
 }

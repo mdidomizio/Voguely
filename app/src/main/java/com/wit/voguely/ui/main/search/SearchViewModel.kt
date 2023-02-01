@@ -18,7 +18,7 @@ class SearchViewModel : ViewModel() {
     private val productsDataSource = ProductsDataSource()
     private val addToCartDataSource = AddToCartDataSource()
 
-    private val _itemSearched = MutableStateFlow <List<Product>> (emptyList())
+    private val _itemSearched = MutableStateFlow<List<Product>>(emptyList())
     val itemSearched: StateFlow<List<Product>> = _itemSearched.asStateFlow()
 
     private var _displayNoResultFound = MutableStateFlow(false)
@@ -64,24 +64,3 @@ class SearchViewModel : ViewModel() {
         }
     }
 }
-
-
-
-/*fun searchItem(searchQuery: CharSequence) {
-        viewModelScope.launch {
-            if(searchQuery.isBlank()){
-                _displayNoResultFound.value = false
-                _itemSearched.value = ListOf<Product>()
-                return@launch
-            }
-            var searchResults = mockData.filter{
-                it.name.contains(searchQuery, ignoreCase = true)
-            }
-            _itemSearched.update {searchResults}
-             _displayNoResultFound.value = searchResults.isEmpty()
-
-}} */
-
-
-
-

@@ -3,6 +3,7 @@ package com.wit.voguely.remote
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.ktx.Firebase
+import com.wit.voguely.DATABASE_URL
 import com.wit.voguely.model.Cart
 import com.wit.voguely.model.CartResponse
 import com.wit.voguely.ui.main.cart.CartItem
@@ -14,7 +15,7 @@ class GetCartDataSource {
 
 
     suspend fun getItemInCart(): List<CartItem> {
-        val database = FirebaseDatabase.getInstance("https://voguely-2f691-default-rtdb.europe-west1.firebasedatabase.app")
+        val database = FirebaseDatabase.getInstance(DATABASE_URL)
         val userId = Firebase.auth.currentUser?.uid ?: return emptyList()
 
         val cartRef = database.getReference("carts").child(userId)

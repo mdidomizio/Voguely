@@ -9,20 +9,18 @@ import com.wit.voguely.databinding.RecyclerViewSingleItemCartBinding
 import com.wit.voguely.ui.main.home.Product
 
 
-
-class CartAdapter ( var onCancelClick: ((CartItem)-> Unit)) :RecyclerView.Adapter<CartAdapter.ViewHolder> () {
-
+class CartAdapter(var onCancelClick: ((CartItem) -> Unit)) : RecyclerView.Adapter<CartAdapter.ViewHolder>() {
 
     var dataCart: List<CartItem> = listOf()
 
     inner class ViewHolder(val binding: RecyclerViewSingleItemCartBinding) :
-            RecyclerView.ViewHolder(binding.root) {
-                init {
-                    binding.cancelIcon.setOnClickListener{
-                        onCancelClick?.invoke(dataCart[adapterPosition])
-                    }
-                    }
-                }
+        RecyclerView.ViewHolder(binding.root) {
+        init {
+            binding.cancelIcon.setOnClickListener {
+                onCancelClick(dataCart[adapterPosition])
+            }
+        }
+    }
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -35,14 +33,14 @@ class CartAdapter ( var onCancelClick: ((CartItem)-> Unit)) :RecyclerView.Adapte
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.binding.itemNameCart.text = dataCart[position].product.name
-        holder.binding.itemPriceCart.text = "${dataCart[position].product.currency} ${dataCart[position].product.price.toString()}"
-        holder.binding.itemQuantityCart.text = "x ${dataCart[position].quantity.toString()}"
+        holder.binding.itemPriceCart.text =
+            "${dataCart[position].product.currency} ${dataCart[position].product.price}"
+        holder.binding.itemQuantityCart.text = "x ${dataCart[position].quantity}"
 
         Glide
             .with(holder.itemView.context)
             .load(dataCart[position].product.image)
             .into(holder.binding.itemPicCart)
-
     }
 
     override fun getItemCount() = dataCart.size

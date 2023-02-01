@@ -51,11 +51,13 @@ class CartViewModel : ViewModel() {
                 return@launch
             }else{
                 _itemsInCart.update { cart }
-                if (cart.isNotEmpty()){
-                    _displayEmptyCart.value = false
-                    //_displayOrderSuccessful.value = false
-                    //_displayFullCart.value = true
-                }
+                _displayEmptyCart.value = cart.isEmpty()
+
+//                if (cart.isNotEmpty()){
+//                    _displayEmptyCart.value = false
+//                    //_displayOrderSuccessful.value = false
+//                    //_displayFullCart.value = true
+//                }
 
             }
         }
@@ -86,17 +88,14 @@ class CartViewModel : ViewModel() {
                 //_displayEmptyCart.value = false
                 deleteAllCartAfterBuying.deleteItemFromCart()
                 _displayEmptyCart.value = true
+                _itemsInCart.value = emptyList()
                 // _displayOrderSuccessful.value = true
 
                 _event.emit(OrderEvent.OrderConfirmed("Your order is confirmed"))
             }catch (e: Exception){
                 _event.emit(OrderEvent.OrderFailed(e.localizedMessage))
             }
-
         }
-
     }
-
-
 
 }

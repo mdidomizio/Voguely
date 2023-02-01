@@ -15,20 +15,14 @@ import com.wit.voguely.databinding.FragmentSplashBinding
 
 class SplashFragment : Fragment() {
 
-    private lateinit var binding : FragmentSplashBinding
-
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
+    private lateinit var binding: FragmentSplashBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        binding = FragmentSplashBinding.inflate(inflater,container,false)
+        binding = FragmentSplashBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -36,16 +30,17 @@ class SplashFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.logo.animate()
-            .alpha(1.0F).setDuration(2000).setInterpolator(DecelerateInterpolator())
-            .withEndAction{
-
-                    val action = when (Firebase.auth.currentUser == null){
-                        true -> R.id.action_splashFragment_to_loginSignupFragment
-                        false -> R.id.action_splashFragment_to_mainFragment2
-                    }
-                    findNavController().navigate(action)
+            .alpha(1.0F)
+            .setDuration(2000)
+            .setInterpolator(DecelerateInterpolator())
+            .withEndAction {
+                val action = when (Firebase.auth.currentUser == null) {
+                    true -> R.id.action_splashFragment_to_loginSignupFragment
+                    false -> R.id.action_splashFragment_to_mainFragment2
                 }
-                    .start()
+                findNavController().navigate(action)
+            }
+            .start()
 
     }
 
