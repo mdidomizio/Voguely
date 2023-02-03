@@ -1,6 +1,6 @@
 package com.wit.voguely.ui.main
 
-import android.os.Build.PRODUCT
+
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -9,7 +9,6 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
-import com.bumptech.glide.Glide
 import com.wit.voguely.databinding.FragmentProductDetailsBinding
 import com.wit.voguely.ui.main.home.AddToCartEvent
 import kotlinx.coroutines.flow.collectLatest
@@ -61,6 +60,9 @@ class ProductDetailsFragment : Fragment() {
                     binding.descriptionProductDetails.text = product.description
                     binding.rateProductDetails.text = product.rating.toString()
 
+                    adapter.data = listOf(product.image, product.image, product.image)
+                    adapter.notifyDataSetChanged()
+
                    /* Glide.with(requireContext())
                         .load(product.image)
                         .into(binding.picDetailsProduct)*/
@@ -68,17 +70,15 @@ class ProductDetailsFragment : Fragment() {
                 }
 
             }
-            viewModel.binding.productImage.adapter = adapter
 
         }
+
+        binding.productImageViewPager.adapter = adapter
+       // binding.productImageViewPager.setPageTransformer(ZoomOutPageTransformer())
 
         binding.addToCartButton.setOnClickListener{
             viewModel.addToCart()
-            //Toast.makeText( this@ProductDetailsFragment.requireActivity(), "Your product has been successfully added to the cart", Toast.LENGTH_SHORT).show()
         }
-
-
-
     }
 
     private fun setEvent(event: AddToCartEvent) {

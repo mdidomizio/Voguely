@@ -8,7 +8,7 @@ import com.wit.voguely.databinding.ProductImageBinding
 
 class ImagesAdapter : RecyclerView.Adapter<ImagesAdapter.ImageViewHolder>() {
 
-    val data = listOf<String>()
+    var data = listOf<String>()
 
     inner class ImageViewHolder(val binding: ProductImageBinding): RecyclerView.ViewHolder(binding.root){
     }
