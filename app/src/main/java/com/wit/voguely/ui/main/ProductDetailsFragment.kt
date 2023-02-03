@@ -74,7 +74,7 @@ class ProductDetailsFragment : Fragment() {
         }
 
         binding.productImageViewPager.adapter = adapter
-       // binding.productImageViewPager.setPageTransformer(ZoomOutPageTransformer())
+
 
         binding.addToCartButton.setOnClickListener{
             viewModel.addToCart()
