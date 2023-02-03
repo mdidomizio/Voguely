@@ -42,7 +42,7 @@ class ProductDetailsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        getArguments()?.getString(PRODUCT_ID_ARG)?.let { viewModel.loadDetails(it) }
+        getArguments()?.getString("id")?.let { viewModel.loadDetails(it) }
 
         lifecycleScope.launch {
             viewModel.event.collectLatest { event ->

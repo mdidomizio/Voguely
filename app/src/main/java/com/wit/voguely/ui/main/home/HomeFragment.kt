@@ -18,6 +18,7 @@ import com.wit.voguely.databinding.FragmentCartBinding
 import com.wit.voguely.databinding.FragmentHomeBinding
 import com.wit.voguely.ui.login.LoginEvent
 import com.wit.voguely.ui.main.MainFragment
+import com.wit.voguely.ui.main.ProductDetailsFragment.Companion.PRODUCT_ID_ARG
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.NonDisposableHandle.parent
 import kotlinx.coroutines.flow.collectLatest
@@ -33,6 +34,9 @@ class HomeFragment : Fragment() {
     private lateinit var binding: FragmentHomeBinding
     private lateinit var viewModel: HomeViewModel
 
+    companion object{
+        const val PRODUCT_ID_ARG = "PRODUCT_ID_ARG"
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
