@@ -1,5 +1,6 @@
 package com.wit.voguely.ui.main
 
+import android.os.Build.PRODUCT
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -13,10 +14,14 @@ import kotlinx.coroutines.flow.collectLatest
 
 class ProductDetailsFragment : Fragment() {
 
-
+    companion object{
+        const val PRODUCT_ID_ARG = "PRODUCT_ID_ARG"
+    }
 
     private lateinit var binding: FragmentProductDetailsBinding
     private lateinit var viewModel : ProductDetailsViewModel
+
+    private val adapter = ImagesAdapter()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,7 +40,7 @@ class ProductDetailsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        getArguments()?.getString("id")?.let { viewModel.loadDetails(it) }
+        getArguments()?.getString(PRODUCT_ID_ARG)?.let { viewModel.loadDetails(it) }
 
 
         lifecycleScope.launchWhenResumed {
@@ -48,16 +53,18 @@ class ProductDetailsFragment : Fragment() {
                     binding.descriptionProductDetails.text = product.description
                     binding.rateProductDetails.text = product.rating.toString()
 
-                    Glide.with(requireContext())
+                   /* Glide.with(requireContext())
                         .load(product.image)
-                        .into(binding.picDetailsProduct)
+                        .into(binding.picDetailsProduct)*/
 
                 }
 
-
-
             }
+            viewModel.binding.productImage.adapter = adapter
+
         }
+
+
 
 
     }
