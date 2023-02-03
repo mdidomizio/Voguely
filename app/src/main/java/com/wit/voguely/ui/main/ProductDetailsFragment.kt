@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import androidx.viewpager2.widget.ViewPager2
 import com.wit.voguely.databinding.FragmentProductDetailsBinding
 import com.wit.voguely.ui.main.home.AddToCartEvent
 import kotlinx.coroutines.flow.collectLatest
@@ -60,7 +61,7 @@ class ProductDetailsFragment : Fragment() {
                     binding.descriptionProductDetails.text = product.description
                     binding.rateProductDetails.text = product.rating.toString()
 
-                    adapter.data = listOf(product.image, product.image, product.image)
+                    adapter.data = listOf(product.image, product.image, product.image, product.image, product.image)
                     adapter.notifyDataSetChanged()
 
                    /* Glide.with(requireContext())
@@ -74,6 +75,7 @@ class ProductDetailsFragment : Fragment() {
         }
 
         binding.productImageViewPager.adapter = adapter
+        binding.productImageViewPager.setPageTransformer(ZoomOutPageTransformer())
 
 
         binding.addToCartButton.setOnClickListener{
@@ -98,6 +100,9 @@ class ProductDetailsFragment : Fragment() {
     }
 
 }
+
+
+
 
 
 
