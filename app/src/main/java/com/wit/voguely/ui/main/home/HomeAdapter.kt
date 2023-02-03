@@ -3,16 +3,19 @@ package com.wit.voguely.ui.main.home
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.wit.voguely.databinding.RecyclerViewSingleItemLayoutBinding
 
+
 class HomeAdapter : RecyclerView.Adapter<HomeAdapter.ViewHolder> () {
+    private val mProducts: List<Product> = emptyList()
     var onItemClick: ((Product) -> Unit)? = null
     var onSeeMoreClicked: ((Product, View) -> Unit)? = null
 
 
-    var data: List<Product> = listOf()
+    var data: MutableList<Product> = mutableListOf()
 
     inner class ViewHolder(val binding: RecyclerViewSingleItemLayoutBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -54,6 +57,15 @@ class HomeAdapter : RecyclerView.Adapter<HomeAdapter.ViewHolder> () {
 
 
         override fun getItemCount() = data.size
+
+    fun updateProductListItems(products: List<Product>) {
+        val diffCallback = ProductDiffCallback(this.data, products)
+        val diffResult = DiffUtil.calculateDiff(diffCallback)
+        data.clear()
+        data.addAll(products)
+        diffResult.dispatchUpdatesTo(this)
+    }
+
     }
 
 

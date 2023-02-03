@@ -69,8 +69,9 @@ class HomeFragment : Fragment() {
 
         lifecycleScope.launchWhenResumed {
             viewModel.dataProduct.collectLatest {
-                adapter.data = it
-                adapter.notifyDataSetChanged()
+                adapter.updateProductListItems(it.toList())
+
+
 
             }
         }

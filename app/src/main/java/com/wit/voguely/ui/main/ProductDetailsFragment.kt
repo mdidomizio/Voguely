@@ -64,10 +64,6 @@ class ProductDetailsFragment : Fragment() {
                     adapter.data = listOf(product.image, product.image, product.image, product.image, product.image)
                     adapter.notifyDataSetChanged()
 
-                   /* Glide.with(requireContext())
-                        .load(product.image)
-                        .into(binding.picDetailsProduct)*/
-
                 }
 
             }

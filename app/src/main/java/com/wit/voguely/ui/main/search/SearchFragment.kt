@@ -59,9 +59,7 @@ class SearchFragment : Fragment() {
 
         lifecycleScope.launchWhenResumed {
             viewModel.itemSearched.collectLatest {
-
-                adapter.data = it
-                adapter.notifyDataSetChanged()
+                adapter.updateProductListItems(it)
 
             }
         }
